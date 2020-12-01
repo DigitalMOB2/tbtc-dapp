@@ -1,0 +1,58 @@
+.typography-h1 {
+  font-family: 'Apercu Pro';
+  font-style: normal;
+  font-weight: 500;
+  font-size: 36px;
+  line-height: 48px;
+}
+
+.typography-h2 {
+  font-family: 'Apercu Pro';
+  font-style: normal;
+  font-weight: 500;
+  font-size: 24px;
+  line-height: 24px;
+}
+
+.typography-h3 {
+  font-family: 'Apercu Pro';
+  font-style: normal;
+  font-weight: normal;
+  font-size: 18px;
+  line-height: 18px;
+}
+
+.typography-h4 {
+  font-family: 'Apercu Pro';
+  font-style: normal;
+  font-weight: normal;
+  font-size: 16px;
+  line-height: 16px;
+}
+
+.typography-h5 {
+  font-family: 'Apercu Pro';
+  font-style: normal;
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 12px;
+  letter-spacing: 0.15em;
+}
+
+.typography-h6 {
+  font-family: 'Apercu Mono Pro';
+  font-style: normal;
+  font-weight: 500;
+  font-size: 8px;
+  line-height: 8px;
+  letter-spacing: 0.1em;
+}
+
+.typography-tiny-mono-text {
+  font-family: 'Apercu Mono Pro';
+  font-size: 4px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 12px;
+  letter-spacing: 0.1em;
+}

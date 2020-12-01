@@ -1,0 +1,31 @@
+.header {
+  display: flex;
+  padding: 32px;
+}
+
+.heading {
+  margin: 0;
+}
+
+.heading a {
+  display: flex;
+  color: inherit;
+}
+
+.right {
+  margin-left: auto;
+}
+
+.network {
+  font-size: 12px;
+  line-height: 15px;
+  color: var(--color-graphite);
+}
+
+.walletButton {
+  height: 24px;
+  border: 1px solid #111010;
+  box-sizing: border-box;
+  border-radius: 97px;
+  margin-left: 16px;
+}

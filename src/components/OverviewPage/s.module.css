@@ -1,0 +1,9 @@
+.page {
+  min-height: 100%;
+  padding: 32px;
+}
+
+.heading {
+  margin: 0;
+  text-align: center;
+}

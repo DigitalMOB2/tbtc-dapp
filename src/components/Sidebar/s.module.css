@@ -1,0 +1,26 @@
+.sidebar {
+  width: 144px;
+  padding-right: 16px;
+}
+
+.link {
+  display: block;
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 15px;
+  padding: 5px 8px 4px;
+  text-decoration: none;
+  color: var(--color-ink);
+  border-radius: 4px;
+  margin-bottom: 28px;
+}
+
+.link:hover {
+  color: var(--color-paper);
+  background-color: var(--color-ink);
+}
+
+.link.activeLink {
+  color: var(--color-paper);
+  background-color: var(--color-ink);
+}
