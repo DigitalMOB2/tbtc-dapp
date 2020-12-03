@@ -1,6 +1,7 @@
 .footer {
   padding: 14px 32px 18px;
   display: flex;
+  grid-area: footer;
 }
 
 .left {

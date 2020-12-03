@@ -4,14 +4,17 @@ import { BrowserRouter as Router } from 'react-router-dom';
 import './index.css';
 import './fonts.css';
 import './typography.css';
+import { ConnectedWeb3ReactProvider } from 'context/connect';
 import { App } from './components/App';
 import reportWebVitals from './reportWebVitals';
 
 ReactDOM.render(
   <React.StrictMode>
-    <Router>
-      <App />
-    </Router>
+    <ConnectedWeb3ReactProvider>
+      <Router>
+        <App />
+      </Router>
+    </ConnectedWeb3ReactProvider>
   </React.StrictMode>,
   document.getElementById('root')
 );

@@ -1,13 +1,15 @@
-.mainContainer {
+/* .mainContainer {
   display: flex;
   padding-left: 32px;
   padding-right: 32px;
-}
+} */
 
 .main {
-  overflow-y: auto;
-  background-color: var(--color-paper);
+  /* overflow-y: auto; */
+  /* background-color: var(--color-paper); */
+  /* box-shadow: 0px 30px 40px rgba(153, 147, 144, 0.15); */
+  /* border-radius: 8px; */
   flex-grow: 1;
-  box-shadow: 0px 30px 40px rgba(153, 147, 144, 0.15);
-  border-radius: 8px;
+  grid-area: main;
+  margin-right: 32px;
 }

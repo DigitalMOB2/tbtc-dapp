@@ -17,20 +17,20 @@ export function App() {
   return (
     <>
       <Header />
-      <div className={s.mainContainer}>
-        <Sidebar />
-        <main className={s.main}>
-          <Suspense fallback={<PageLoading />}>
-            <Switch>
-              <Route exact path="/" component={OverviewPage} />
-              <Route path="/mint" component={MintPage} />
-              <Route path="/redeem" component={RedeemPage} />
-              <Route path="/earn" component={EarnPage} />
-              <Redirect to="/" />
-            </Switch>
-          </Suspense>
-        </main>
-      </div>
+      {/* <div className={s.mainContainer}> */}
+      <Sidebar />
+      <main className={s.main}>
+        <Suspense fallback={<PageLoading />}>
+          <Switch>
+            <Route exact path="/" component={OverviewPage} />
+            <Route path="/mint" component={MintPage} />
+            <Route path="/redeem" component={RedeemPage} />
+            <Route path="/earn" component={EarnPage} />
+            <Redirect to="/" />
+          </Switch>
+        </Suspense>
+      </main>
+      {/* </div> */}
       <Footer />
     </>
   );

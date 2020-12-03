@@ -1,6 +1,8 @@
 .sidebar {
   width: 144px;
   padding-right: 16px;
+  grid-area: sidebar;
+  padding-left: 32px;
 }
 
 .link {
