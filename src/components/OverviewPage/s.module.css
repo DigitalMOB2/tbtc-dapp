@@ -1,11 +1,11 @@
 .page {
-  min-height: 100%;
+  /* min-height: 100%;
   padding: 32px;
 
   overflow-y: auto;
   background-color: var(--color-paper);
   box-shadow: 0px 30px 40px rgba(153, 147, 144, 0.15);
-  border-radius: 8px;
+  border-radius: 8px; */
 }
 
 .heading {
