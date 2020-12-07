@@ -1,0 +1,44 @@
+.wrap {
+  display: flex;
+  flex-direction: column;
+}
+
+.label {
+  width: 128px;
+  position: relative;
+  background: var(--color-paper);
+  color: var(--color-ink);
+  border-radius: 100px;
+  border: 1px solid var(--color-ink);
+  padding: 12px 20px 10px;
+  display: inline-flex;
+  cursor: pointer;
+}
+
+.label.active {
+  background: var(--color-ink);
+  color: var(--color-paper);
+}
+
+.label input {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 0;
+  height: 0;
+  opacity: 0;
+  visibility: hidden;
+  overflow: hidden;
+}
+
+.label + .label {
+  margin-top: 16px;
+}
+
+.checkMark {
+  color: var(--color-paper);
+  position: absolute;
+  top: 50%;
+  right: 9px;
+  transform: translateY(-50%);
+}

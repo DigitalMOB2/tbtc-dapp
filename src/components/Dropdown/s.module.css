@@ -1,0 +1,97 @@
+.wrap {
+  position: relative;
+  background: var(--color-paper);
+  width: 192px;
+}
+
+.select {
+  display: none;
+}
+
+.selected {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-radius: 4px;
+  border: 1px solid var(--color-graphite);
+  position: relative;
+  padding: 6px 6px 6px 8px;
+  cursor: pointer;
+}
+
+.selected.active {
+  border-radius: 4px 4px 0 0;
+  border-bottom: 0;
+}
+
+.selected.active::after {
+  content: '';
+  background: var(--color-graphite);
+  height: 1px;
+  display: block;
+  position: absolute;
+  bottom: -1px;
+  left: 8px;
+  right: 8px;
+  z-index: 1;
+}
+
+.items {
+  position: absolute;
+  background: var(--color-paper);
+  top: 100%;
+  left: 0;
+  right: 0;
+  border-left: 1px solid var(--color-graphite);
+  border-bottom: 1px solid var(--color-graphite);
+  border-right: 1px solid var(--color-graphite);
+  border-radius: 0 0 4px 4px;
+  padding-top: 2px;
+}
+
+.item {
+  border-radius: 4px;
+  margin: 3px;
+  cursor: pointer;
+  padding: 4px 6px;
+}
+
+.item:hover {
+  background: var(--color-parchment);
+}
+
+.icon {
+  vertical-align: middle;
+  margin-right: 8px;
+}
+
+.red {
+  color: var(--color-saffron);
+}
+
+.yellow {
+  color: var(--color-turmeric);
+}
+
+.green {
+  color: var(--color-mint);
+}
+
+.itemString {
+  display: flex;
+  align-items: center;
+  flex-grow: 1;
+}
+
+.secondaryText {
+  text-align: right;
+  margin-left: auto;
+}
+
+.hidden {
+  display: none;
+}
+
+.dropdownArrow {
+  margin-left: 8px;
+}

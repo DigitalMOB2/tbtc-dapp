@@ -14,6 +14,7 @@
     "@web3-react/ledger-connector": "^6.1.1",
     "@web3-react/walletconnect-connector": "^6.1.6",
     "classnames": "^2.2.6",
+    "nanoid": "^3.1.20",
     "outy": "^0.1.2",
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
