@@ -7,7 +7,9 @@ export function Footer() {
         <div className={s.version}>{`v.${process.env.REACT_APP_VERSION}`}</div>
         <span className={s.alphaLabel}>ALPHA</span>
       </div>
-      <button type="button" className={s.helpButton}>?</button>
+      <button type="button" className={s.helpButton}>
+        ?
+      </button>
     </footer>
   );
 }

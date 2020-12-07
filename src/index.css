@@ -1,3 +1,5 @@
+/* https://www.color-blindness.com/color-name-hue/ */
+
 :root {
   --color-paper: #fffdfc;
   --color-parchment: #f3f1ec;
@@ -5,7 +7,12 @@
   --color-ink: #080503;
   --color-mint: #0b8f78;
   --color-turmeric: #fcb01c;
-  --color-Saffron: #f04925;
+  --color-saffron: #f04925;
+  --color-jagged-ice: #cee7e2;
+  --color-kilamanjaro: #423e3b;
+  --color-mercury: #d6d3d1;
+  --color-pumpkin: #fb8110;
+  --color-light-slate-blue: #a757f8;
 }
 
 body {
@@ -55,4 +62,38 @@ footer {
   position: absolute;
   white-space: nowrap;
   width: 1px;
+}
+
+.button {
+  cursor: pointer;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  font-family: 'Apercu Pro', inherit, sans-serif;
+  border-radius: 97px;
+  transition: color 0.05s ease-out, background 0.05s ease-out;
+}
+
+.button.primary {
+  background: var(--color-ink);
+  border: 1px solid #111010;
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 18px;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: var(--color-paper);
+  padding: 6px 12px;
+}
+
+.button.primary:hover {
+  background: var(--color-kilamanjaro);
+  color: var(--color-parchment);
+}
+
+.button.primary[disabled] {
+  background: var(--color-mercury);
+  color: var(--color-graphite);
 }
