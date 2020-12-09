@@ -13,6 +13,8 @@
   --color-mercury: #d6d3d1;
   --color-pumpkin: #fb8110;
   --color-light-slate-blue: #a757f8;
+
+  --rgb-mint: 11, 143, 120;
 }
 
 body {
@@ -76,9 +78,13 @@ footer {
   transition: color 0.05s ease-out, background 0.05s ease-out;
 }
 
+.button[disabled] {
+  cursor: not-allowed;
+}
+
 .button.primary {
   background: var(--color-ink);
-  border: 1px solid #111010;
+  border: 1px solid var(--color-ink);
   font-weight: 500;
   font-size: 12px;
   line-height: 18px;
@@ -95,5 +101,31 @@ footer {
 
 .button.primary[disabled] {
   background: var(--color-mercury);
+  border-color: var(--color-mercury);
   color: var(--color-graphite);
+}
+
+.button.secondary {
+  background: var(--color-paper);
+  border: 1px solid var(--color-ink);
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 18px;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: var(--color-ink);
+  padding: 6px 12px;
+}
+
+.button.secondary:hover {
+  opacity: 0.8;
+}
+
+.button.secondary[disabled] {
+  border-color: var(--color-graphite);
+  color: var(--color-graphite);
+}
+
+.button.secondary[disabled]:hover {
+  background: inherit;
 }

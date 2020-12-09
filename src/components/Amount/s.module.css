@@ -41,4 +41,9 @@
   top: 50%;
   right: 9px;
   transform: translateY(-50%);
+  opacity: 0;
+}
+
+.label.active .checkMark {
+  opacity: 1;
 }

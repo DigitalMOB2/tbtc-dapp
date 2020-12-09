@@ -1,6 +1,6 @@
 .page {
   padding: 32px;
-  height: 100%;
+  min-height: 100%;
 }
 
 .heading {
@@ -12,5 +12,29 @@
 }
 
 .content {
+  display: flex;
+  justify-content: space-between;
+  padding: 0 24px;
+}
 
+.block {
+}
+
+.blockTitle {
+  color: var(--color-graphite);
+  letter-spacing: 0;
+  margin: 0 0 32px
+}
+
+.buttonsWrap {
+  margin-top: 48px;
+  display: flex;
+}
+
+.button {
+  flex-grow: 1;
+}
+
+.button + .button {
+  margin-left: 16px;
 }

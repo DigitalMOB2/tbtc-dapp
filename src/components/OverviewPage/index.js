@@ -32,7 +32,9 @@ export default function OverviewPage() {
           <NavLink to="/redeem" className={cn('button', 'primary', s.button)}>
             redeem btc &#8594;
           </NavLink>
-          <div className={cn('typography-h6', s.hint)}>1,200,000 TBTC market</div>
+          <div className={cn('typography-h6', s.hint)}>
+            1,200,000 TBTC market
+          </div>
         </div>
       </div>
     </div>

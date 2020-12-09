@@ -1,8 +1,8 @@
-import { InjectedConnector } from "@web3-react/injected-connector";
+import { InjectedConnector } from '@web3-react/injected-connector';
 // import { NetworkConnector } from "@web3-react/network-connector";
-import { WalletConnectConnector } from "@web3-react/walletconnect-connector";
+import { WalletConnectConnector } from '@web3-react/walletconnect-connector';
 // import { WalletLinkConnector } from "@web3-react/walletlink-connector";
-import { LedgerConnector } from "@web3-react/ledger-connector";
+import { LedgerConnector } from '@web3-react/ledger-connector';
 // import { TrezorConnector } from "@web3-react/trezor-connector";
 // import { FrameConnector } from "@web3-react/frame-connector";
 // import { FortmaticConnector } from "@web3-react/fortmatic-connector";
@@ -13,12 +13,12 @@ import { LedgerConnector } from "@web3-react/ledger-connector";
 
 const POLLING_INTERVAL = 12000;
 const RPC_URLS = {
-  1: "https://mainnet.infura.io/v3/84842078b09946638c03157f83405213",
-  4: "https://rinkeby.infura.io/v3/84842078b09946638c03157f83405213"
+  1: 'https://mainnet.infura.io/v3/84842078b09946638c03157f83405213',
+  4: 'https://rinkeby.infura.io/v3/84842078b09946638c03157f83405213',
 };
 
 export const injected = new InjectedConnector({
-  supportedChainIds: [1, 3, 4, 5, 42]
+  supportedChainIds: [1, 3, 4, 5, 42],
 });
 
 // export const network = new NetworkConnector({
@@ -29,9 +29,9 @@ export const injected = new InjectedConnector({
 
 export const walletconnect = new WalletConnectConnector({
   rpc: { 1: RPC_URLS[1] },
-  bridge: "https://bridge.walletconnect.org",
+  bridge: 'https://bridge.walletconnect.org',
   qrcode: true,
-  pollingInterval: POLLING_INTERVAL
+  pollingInterval: POLLING_INTERVAL,
 });
 
 // export const walletlink = new WalletLinkConnector({
@@ -42,7 +42,7 @@ export const walletconnect = new WalletConnectConnector({
 export const ledger = new LedgerConnector({
   chainId: 1,
   url: RPC_URLS[1],
-  pollingInterval: POLLING_INTERVAL
+  pollingInterval: POLLING_INTERVAL,
 });
 
 // export const trezor = new TrezorConnector({

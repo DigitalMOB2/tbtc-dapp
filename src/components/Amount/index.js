@@ -1,4 +1,3 @@
-import { nanoid } from 'nanoid';
 import cn from 'classnames';
 
 import s from './s.module.css';
@@ -16,8 +15,8 @@ export const Amount = ({ values, currency, selected, callback }) => {
 
   return (
     <div className={s.wrap}>
-      {values.map((value) => {
-        const id = nanoid();
+      {values.map((value, idx) => {
+        const id = `amount${idx}`;
         return (
           <label
             htmlFor={id}
@@ -39,11 +38,9 @@ export const Amount = ({ values, currency, selected, callback }) => {
               tabIndex={-1}
               onChange={(e) => callback(Number(e.target.value))}
             />
-            {value === selected ? (
-              <svg width="16" height="16" className={s.checkMark}>
-                <use xlinkHref="/sprite.svg#check" />
-              </svg>
-            ) : null}
+            <svg width="16" height="16" className={s.checkMark}>
+              <use xlinkHref="/sprite.svg#check" />
+            </svg>
           </label>
         );
       })}
