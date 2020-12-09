@@ -2,8 +2,10 @@ import { useState } from 'react';
 import cn from 'classnames';
 
 import { Dropdown } from '../Dropdown';
-import { Checklist } from './Checklist';
+import { Checklist } from '../Checklist';
 import { Amount } from '../Amount';
+import { Check } from '../Check';
+import { Progress } from '../Progress';
 import s from './s.module.css';
 
 const options = [
@@ -50,12 +52,54 @@ export default function MintPage() {
       </div>
       <Checklist />
       <div className={s.content}>
-        <Amount
-          values={amountValues}
-          currency="BTC"
-          selected={selectedAmount}
-          callback={handlerAmount}
-        />
+        <div className={s.block}>
+          <h3 className={cn('typography-h5', s.blockTitle)}>Amount</h3>
+          <Amount
+            values={amountValues}
+            currency="BTC"
+            selected={selectedAmount}
+            callback={handlerAmount}
+          />
+        </div>
+        <div className={s.block}>
+          <h3 className={cn('typography-h5', s.blockTitle)}>Review</h3>
+          <Check />
+          <div className={s.buttonsWrap}>
+            <button
+              type="button"
+              className={cn('button', 'secondary', s.button)}
+            >
+              Cancel
+            </button>
+            <button
+              type="button"
+              className={cn('button', 'primary', s.button)}
+              disabled
+            >
+              Confirm
+            </button>
+          </div>
+        </div>
+        <div className={s.block}>
+          <h3 className={cn('typography-h5', s.blockTitle)}>Progress</h3>
+          <Progress
+            options={[
+              { name: 'Start', description: 'Despoit ID: 1234•••9087' },
+              {
+                name: 'Deposit Size',
+                description: '0.1 BTC > 0.09 TBTC\n0.255 ETH',
+              },
+              {
+                name: 'Send BTC',
+                description: '0x123456789012345678900098989786756447',
+              },
+              { name: 'BTC Block Confirmation' },
+              { name: 'Prove Deposit' },
+              { name: 'Complete' },
+            ]}
+            activeIndex={3}
+          />
+        </div>
       </div>
     </div>
   );
