@@ -51,6 +51,18 @@ body {
   height: 100vh;
 }
 
+#notifications-root {
+  z-index: 20;
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  padding: 0 8px;
+}
+
+#notifications-root:empty {
+  display: none;
+}
+
 header,
 footer {
   grid-column: 1 / 3;

@@ -4,17 +4,20 @@ import { BrowserRouter as Router } from 'react-router-dom';
 import './index.css';
 import './fonts.css';
 import './typography.css';
-import { ConnectedWeb3ReactProvider } from 'context/connect';
+import { GeneralProvider } from 'context/general';
+import { ConnectedWalletProvider } from 'context/wallet';
 import { App } from './components/App';
 import reportWebVitals from './reportWebVitals';
 
 ReactDOM.render(
   <React.StrictMode>
-    <ConnectedWeb3ReactProvider>
-      <Router>
-        <App />
-      </Router>
-    </ConnectedWeb3ReactProvider>
+    <GeneralProvider>
+      <ConnectedWalletProvider>
+        <Router>
+          <App />
+        </Router>
+      </ConnectedWalletProvider>
+    </GeneralProvider>
   </React.StrictMode>,
   document.getElementById('root')
 );

@@ -1,12 +1,12 @@
 import { useContext } from 'react';
-import { ConnectContext } from 'context/connect';
+import { WalletContext } from 'context/wallet';
 import { Connect } from 'components/Header/Connect';
-import { getNetworkName } from 'utils/connect';
+import { getNetworkName } from 'utils/wallet';
 import s from './s.module.css';
 
 export function Header() {
-  const { values } = useContext(ConnectContext);
-  const networkName = getNetworkName(values.chainId);
+  const walletContext = useContext(WalletContext);
+  const networkName = getNetworkName(walletContext.chainId);
 
   return (
     <header className={s.header}>

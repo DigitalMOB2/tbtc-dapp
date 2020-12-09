@@ -1,26 +1,29 @@
 import { useRef, useState, useEffect, useContext } from 'react';
 import { usePopper } from 'react-popper';
 import outy from 'outy';
-import { ConnectContext, getErrorMessage } from 'context/connect';
+import { WalletContext } from 'context/wallet';
 import { formatEther } from '@ethersproject/units';
+import { copyToClipboard } from 'utils/copyToClipboard';
+import { useBallance } from 'hooks/wallet';
 import s from './s.module.css';
 
+/** @param {string|null|undefined} account */
 function trimAddress(account) {
   if (!account) return '';
-  return account === null
-    ? '-'
-    : account
-    ? `${account.substring(0, 6)}...${account.substring(account.length - 4)}`
-    : '';
+
+  return `${account.substring(0, 6)}...${account.substring(
+    account.length - 4
+  )}`;
 }
 
 export function Connect() {
-  const { values, actions } = useContext(ConnectContext);
+  const walletContext = useContext(WalletContext);
   const [open, setOpen] = useState(false);
   const referenceElement = useRef(null);
   const popperElement = useRef(null);
   /** @type{{current: {remove: Function}|null}} */
   const outyRef = useRef(null);
+  const ethBalance = useBallance();
 
   const { styles, attributes, forceUpdate } = usePopper(
     referenceElement.current,
@@ -52,13 +55,10 @@ export function Connect() {
     };
   }, [open, forceUpdate]);
 
-  const isConnected = !!(values.active || values.error);
+  const isConnected = !!(walletContext.active || walletContext.error);
 
   return (
     <>
-      {!!values.error && (
-        <i style={{ color: 'orangered' }}>{getErrorMessage(values.error)}</i>
-      )}
       <button
         type="button"
         className={s.walletButton}
@@ -66,39 +66,52 @@ export function Connect() {
         onClick={() => setOpen((isOpen) => !isOpen)}
         {...attributes.popper}
       >
-        {isConnected ? trimAddress(values.account) : 'Connect'}
+        {isConnected ? trimAddress(walletContext.account) : 'Connect'}
       </button>
       <div
         ref={popperElement}
         style={{ ...styles.popper, visibility: open ? 'visible' : 'hidden' }}
         className={s.popup}
       >
+        <div>{walletContext.status === 'activating' ? 'loading...' : null}</div>
         {isConnected ? (
           <>
+            <button
+              type="button"
+              onClick={() => copyToClipboard(walletContext.account)}
+            >
+              COPY
+            </button>
             <div>
-              {values.ethBalance === undefined
+              {ethBalance === undefined
                 ? '...'
-                : values.ethBalance === null
+                : ethBalance === null
                 ? 'Error'
-                : `Ξ${parseFloat(formatEther(values.ethBalance)).toPrecision(
-                    4
-                  )}`}
+                : `Ξ ${parseFloat(formatEther(ethBalance)).toPrecision(4)}`}
             </div>
           </>
         ) : (
           <>
-            <button type="button" className={s.item} onClick={actions.injected}>
+            <button
+              type="button"
+              className={s.item}
+              onClick={() => walletContext.injected()}
+            >
               Metamask
             </button>
-            <button type="button" className={s.item}>
+            <button
+              type="button"
+              className={s.item}
+              onClick={() => walletContext.ledger()}
+            >
               Ledger
             </button>
           </>
         )}
-        {values.active || values.error ? (
+        {walletContext.active || walletContext.error ? (
           <button
             onClick={() => {
-              actions.deactivate();
+              walletContext.disconnect();
             }}
           >
             Disconnect
