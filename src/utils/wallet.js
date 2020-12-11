@@ -3,8 +3,10 @@ import {
   NoEthereumProviderError,
   UserRejectedRequestError as UserRejectedRequestErrorInjected,
 } from '@web3-react/injected-connector';
-import { UserRejectedRequestError as UserRejectedRequestErrorWalletConnect } from '@web3-react/walletconnect-connector';
-import { UserRejectedRequestError as UserRejectedRequestErrorFrame } from '@web3-react/frame-connector';
+import { BitcoinHelpers } from '@keep-network/tbtc.js';
+import BigNumber from 'bignumber.js';
+
+BigNumber.set({ DECIMAL_PLACES: 8 });
 
 /**
  * @param {number} [chainId]
@@ -28,14 +30,22 @@ export function getErrorMessage(error) {
     return 'No Ethereum browser extension detected, install MetaMask on desktop or visit from a dApp browser on mobile.';
   } else if (error instanceof UnsupportedChainIdError) {
     return "You're connected to an unsupported network.";
-  } else if (
-    error instanceof UserRejectedRequestErrorInjected ||
-    error instanceof UserRejectedRequestErrorWalletConnect ||
-    error instanceof UserRejectedRequestErrorFrame
-  ) {
+  } else if (error instanceof UserRejectedRequestErrorInjected) {
     return 'Please authorize this website to access your Ethereum account.';
   } else {
     console.error(error);
     return 'An unknown error occurred. Check the console for more details.';
   }
+}
+
+export function formatSatsToBtc(sats) {
+  return new BigNumber(sats.toString())
+    .div(BitcoinHelpers.satoshisPerBtc.toString())
+    .toString();
+}
+
+export function getEtherscanUrl(chainId, address) {
+  return `https://${
+    chainId === 3 ? 'ropsten.' : ''
+  }etherscan.io/address/${address}`;
 }

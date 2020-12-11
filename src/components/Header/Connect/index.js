@@ -4,7 +4,7 @@ import outy from 'outy';
 import { WalletContext } from 'context/wallet';
 import { formatEther } from '@ethersproject/units';
 import { copyToClipboard } from 'utils/copyToClipboard';
-import { useBallance } from 'hooks/wallet';
+import { useBalance } from 'hooks/wallet';
 import s from './s.module.css';
 
 /** @param {string|null|undefined} account */
@@ -23,7 +23,7 @@ export function Connect() {
   const popperElement = useRef(null);
   /** @type{{current: {remove: Function}|null}} */
   const outyRef = useRef(null);
-  const ethBalance = useBallance();
+  const ethBalance = useBalance();
 
   const { styles, attributes, forceUpdate } = usePopper(
     referenceElement.current,

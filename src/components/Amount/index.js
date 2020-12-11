@@ -1,4 +1,5 @@
 import cn from 'classnames';
+import { formatSatsToBtc } from 'utils/wallet';
 
 import s from './s.module.css';
 
@@ -27,7 +28,7 @@ export const Amount = ({ values, currency, selected, callback }) => {
             onKeyPress={(event) => handlerKeyPress(event, value)}
           >
             <span className="typography-h4">
-              {value} {currency}
+              {formatSatsToBtc(value)} {currency}
             </span>
             <input
               type="radio"

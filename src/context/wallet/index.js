@@ -1,11 +1,12 @@
 import { createContext, useEffect, useState, useContext, useRef } from 'react';
 import { Web3ReactProvider, useWeb3React } from '@web3-react/core';
-import { Web3Provider } from '@ethersproject/providers';
+// import { Web3Provider } from '@ethersproject/providers';
+import Web3 from 'web3';
 import { useSessionStorage } from 'react-use-storage';
 
 import { connectors } from './connectors';
 // import { useEagerConnect, useInactiveListener } from 'hooks/connect';
-import { useBallance, useBlockNumber } from 'hooks/wallet';
+// import { useBalance, useBlockNumber } from 'hooks/wallet';
 import { getErrorMessage } from 'utils/wallet';
 import { useGeneral } from 'context/general';
 
@@ -59,7 +60,7 @@ export function WalletProvider({ children }) {
     deactivate,
   } = web3React;
   // console.log({ web3React });
-  // window.web3React = web3React;
+  window.web3React = web3React;
 
   const [
     sessionProvider,
@@ -88,6 +89,7 @@ export function WalletProvider({ children }) {
         setSessionProvider(name);
       })
       .catch((error) => {
+        console.log({ error });
         addNotification(getErrorMessage(error), { level: 'error' });
       })
       .finally(() => {
@@ -117,6 +119,7 @@ export function WalletProvider({ children }) {
   useEffect(() => {
     if (error) {
       const errorMessage = getErrorMessage(error);
+      console.log({ error });
       if (errorMessage) addNotification(errorMessage, { level: 'error' });
     }
   }, [error, addNotification]);
@@ -150,9 +153,10 @@ export function WalletProvider({ children }) {
 }
 
 function getLibrary(provider) {
-  const library = new Web3Provider(provider);
-  library.pollingInterval = 8000;
-  return library;
+  // const library = new Web3Provider(provider);
+  // library.pollingInterval = 8000;
+  // return library;
+  return new Web3(provider);
 }
 
 export function ConnectedWalletProvider({ children }) {

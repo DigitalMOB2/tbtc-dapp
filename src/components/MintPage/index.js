@@ -1,6 +1,7 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import cn from 'classnames';
 
+import { useTBTCContract } from 'hooks/wallet';
 import { Dropdown } from '../Dropdown';
 import { Checklist } from '../Checklist';
 import { Amount } from '../Amount';
@@ -26,11 +27,20 @@ const options = [
   },
 ];
 
-const amountValues = [0.01, 0.2, 0.3];
-
 export default function MintPage() {
   const [selected, setSelected] = useState(options[0]);
-  const [selectedAmount, setSelectedAmount] = useState(amountValues[0]);
+  const [amounts, setAmounts] = useState([]);
+  const [selectedAmount, setSelectedAmount] = useState();
+
+  const tbtc = useTBTCContract();
+
+  useEffect(() => {
+    if (tbtc) {
+      tbtc.Deposit.availableSatoshiLotSizes().then((vals) => {
+        setAmounts(vals);
+      });
+    }
+  }, [tbtc]);
 
   const handlerDropdown = (value) => {
     setSelected(value);
@@ -38,6 +48,15 @@ export default function MintPage() {
 
   const handlerAmount = (value) => {
     setSelectedAmount(value);
+  };
+
+  const submitHandler = (e) => {
+    e.preventDefault();
+    if (tbtc && selectedAmount) {
+      tbtc.Deposit.withSatoshiLotSize(selectedAmount)
+        .then(console.log)
+        .catch(console.error);
+    }
   };
 
   return (
@@ -55,13 +74,13 @@ export default function MintPage() {
         <div className={s.block}>
           <h3 className={cn('typography-h5', s.blockTitle)}>Amount</h3>
           <Amount
-            values={amountValues}
+            values={amounts}
             currency="BTC"
             selected={selectedAmount}
             callback={handlerAmount}
           />
         </div>
-        <div className={s.block}>
+        <form className={s.block} onSubmit={submitHandler}>
           <h3 className={cn('typography-h5', s.blockTitle)}>Review</h3>
           <Check />
           <div className={s.buttonsWrap}>
@@ -72,14 +91,14 @@ export default function MintPage() {
               Cancel
             </button>
             <button
-              type="button"
+              type="submit"
               className={cn('button', 'primary', s.button)}
-              disabled
+              disabled={!selectedAmount}
             >
               Confirm
             </button>
           </div>
-        </div>
+        </form>
         <div className={s.block}>
           <h3 className={cn('typography-h5', s.blockTitle)}>Progress</h3>
           <Progress

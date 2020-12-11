@@ -20,15 +20,15 @@
 .alphaLabel {
   background-color: var(--color-turmeric);
   text-align: center;
-  padding: 1px 5px 0;
+  padding: 0 8px;
   display: inline-flex;
   border-radius: 8px;
 
   font-family: 'Apercu Mono Pro';
-  font-size: 4px;
+  font-size: 6px;
   font-style: normal;
   font-weight: 500;
-  line-height: 8px;
+  line-height: 12px;
   letter-spacing: 0.1em;
 }
 
