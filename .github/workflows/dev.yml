@@ -38,10 +38,14 @@ jobs:
 
     - name: Install dependencies
       if: steps.node-cache.outputs.cache-hit != 'true'
-      run: npm ci
+      run: npm install
+      env:
+        CI: false
 
     - name: Build
       run: npm run build
+      env:
+        CI: false
 
     - name: Save artifacts
       uses: actions/upload-artifact@v2
