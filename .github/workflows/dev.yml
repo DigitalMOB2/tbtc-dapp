@@ -86,7 +86,7 @@ jobs:
         SLACK_BOT_TOKEN: ${{ secrets.SLACK_BOT_TOKEN }}
       uses: voxmedia/github-action-slack-notify-build@v1
       with:
-        channel_id: C01D16VJ84C
+        channel_id: C01GPM96YEN
         status: DEPLOYMENT STARTED
         color: warning
 
