@@ -9,6 +9,8 @@
   border-radius: 8px;
   font-size: 15px;
   line-height: 16px;
+  word-break: break-word;
+  white-space: pre-wrap;
 }
 
 .notification.error {
@@ -42,6 +44,7 @@
   align-items: center;
   justify-content: center;
   color: inherit;
+  flex-shrink: 0;
 }
 
 .close:hover {

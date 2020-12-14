@@ -12,6 +12,7 @@ import { AlphaAlertModal } from './AlphaAlertModal';
 import { GenerateAddressModal } from './GenerateAddressModal';
 import s from './s.module.css';
 import { useMint } from '..';
+import { useGeneral } from 'context/general';
 
 const options = [
   {
@@ -34,6 +35,7 @@ const options = [
 export default function MintPage() {
   const mintContext = useMint();
   const history = useHistory();
+  const { notifications } = useGeneral();
   const [selected, setSelected] = useState(options[0]);
   const [amounts, setAmounts] = useState([]);
   const [selectedAmount, setSelectedAmount] = useState();
@@ -73,7 +75,9 @@ export default function MintPage() {
           mintContext.setDeposit(depositResponse);
           history.push(`/mint/${depositResponse.address}`);
         })
-        .catch(console.error)
+        .catch((err) => {
+          notifications.addNotification(err.message, { level: 'error' });
+        })
         .finally(() => setDisplayGenerateAddress(false));
     }
   };
