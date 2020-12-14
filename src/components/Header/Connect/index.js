@@ -1,6 +1,7 @@
 import { useRef, useState, useEffect, useContext } from 'react';
 import { usePopper } from 'react-popper';
 import outy from 'outy';
+import cn from 'classnames';
 import { WalletContext } from 'context/wallet';
 import { formatEther } from '@ethersproject/units';
 import { copyToClipboard } from 'utils/copyToClipboard';
@@ -61,11 +62,17 @@ export function Connect() {
     <>
       <button
         type="button"
-        className={s.walletButton}
+        className={cn(s.walletButton, {
+          [s.open]: open,
+          [s.connected]: isConnected,
+        })}
         ref={referenceElement}
         onClick={() => setOpen((isOpen) => !isOpen)}
         {...attributes.popper}
       >
+        <svg width="11" height="11">
+          <use xlinkHref="/sprite.svg#wallet" />
+        </svg>
         {isConnected ? trimAddress(walletContext.account) : 'Connect'}
       </button>
       <div
@@ -79,9 +86,11 @@ export function Connect() {
             <button
               type="button"
               onClick={() => copyToClipboard(walletContext.account)}
+              className={cn('typography-tiny-mono-text', s.copyButton)}
             >
               COPY
             </button>
+            <hr />
             <div>
               {ethBalance === undefined
                 ? '...'
@@ -97,6 +106,9 @@ export function Connect() {
               className={s.item}
               onClick={() => walletContext.injected()}
             >
+              <svg width="20" height="19">
+                <use xlinkHref="/sprite.svg#metamask" />
+              </svg>
               Metamask
             </button>
             <button
@@ -104,12 +116,17 @@ export function Connect() {
               className={s.item}
               onClick={() => walletContext.ledger()}
             >
+              <svg width="20" height="20">
+                <use xlinkHref="/sprite.svg#ledger" />
+              </svg>
               Ledger
             </button>
           </>
         )}
         {walletContext.active || walletContext.error ? (
           <button
+            type="button"
+            className={s.item}
             onClick={() => {
               walletContext.disconnect();
             }}

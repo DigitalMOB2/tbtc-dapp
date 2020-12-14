@@ -1,4 +1,5 @@
 import s from './s.module.css';
+import { Svg } from 'components/Svg';
 import { version } from '../../../package.json';
 
 export function Footer() {
@@ -8,9 +9,9 @@ export function Footer() {
         <div className={s.version}>{`v.${version}`}</div>
         <span className={s.alphaLabel}>ALPHA</span>
       </div>
-      <button type="button" className={s.helpButton}>
-        ?
-      </button>
+      <a href="/" className={s.helpButton}>
+        <Svg id="question" width="24" height="24" />
+      </a>
     </footer>
   );
 }

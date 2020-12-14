@@ -6,18 +6,66 @@
   margin-left: 16px;
 }
 
+.walletButton.open {
+  background: var(--color-ink);
+  color: var(--color-paper);
+}
+
+.walletButton svg {
+  margin-right: 8px;
+  color: var(--color-graphite);
+}
+
+.walletButton.open svg,
+.walletButton.connected svg {
+  color: currentColor !important;
+}
+
 .popup {
   background: var(--color-ink);
   color: var(--color-paper);
-  border-radius: 12px 12px 8px 8px;
-  padding: 0 5px;
+  border-radius: 8px;
+  padding: 5px;
+  z-index: 10;
 }
 
 .item {
   background-color: transparent;
   color: var(--color-paper);
-  display: block;
   width: 100%;
   border: none;
   text-align: left;
+  display: flex;
+  align-items: center;
+  padding: 8px;
+  border-radius: 4px;
+}
+
+.item:hover {
+  background-color: var(--color-kilamanjaro);
+}
+
+.item svg {
+  margin-right: 8px;
+}
+
+.copyButton {
+  background: var(--color-paper);
+  padding: 0 7px;
+  border: 0;
+  border-radius: 8px;
+  margin-left: auto;
+  display: block;
+}
+
+.disconnectButton {
+  background-color: transparent;
+  color: var(--color-paper);
+  width: 100%;
+  border: none;
+  text-align: left;
+  display: flex;
+  align-items: center;
+  padding: 8px;
+  border-radius: 4px;
 }

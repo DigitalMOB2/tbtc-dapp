@@ -8,13 +8,13 @@ export function Sidebar() {
         <NavLink exact to="/" className={s.link} activeClassName={s.activeLink}>
           OVERVIEW
         </NavLink>
-        <NavLink to="/mint" className={s.link}>
+        <NavLink to="/mint" className={s.link} activeClassName={s.activeLink}>
           MINT
         </NavLink>
-        <NavLink to="/redeem" className={s.link}>
+        <NavLink to="/redeem" className={s.link} activeClassName={s.activeLink}>
           REDEEM
         </NavLink>
-        <NavLink to="/earn" className={s.link}>
+        <NavLink to="/earn" className={s.link} activeClassName={s.activeLink}>
           EARN
         </NavLink>
       </nav>

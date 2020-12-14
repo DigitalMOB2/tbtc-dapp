@@ -56,6 +56,7 @@ export function WalletProvider({ children }) {
     account,
     active,
     error,
+    library,
     activate,
     deactivate,
   } = web3React;
