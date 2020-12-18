@@ -84,7 +84,7 @@ export default function MintPage() {
 
   return (
     <div className={s.page}>
-      <div className={cn(s.heading)}>
+      <div className={s.heading}>
         <h2 className="typography-h2">Start a Mint by depositing BTC</h2>
         <Dropdown
           options={options}

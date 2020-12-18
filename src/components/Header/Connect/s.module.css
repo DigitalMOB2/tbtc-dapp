@@ -4,8 +4,16 @@
   box-sizing: border-box;
   border-radius: 97px;
   margin-left: 16px;
+  text-transform: uppercase;
+  padding: 4px 15px;
+  font-size: 12px;
+  line-height: 15px;
+  font-weight: 500;
+  letter-spacing: 1px;
+  cursor: pointer;
 }
 
+.walletButton:hover,
 .walletButton.open {
   background: var(--color-ink);
   color: var(--color-paper);
@@ -14,6 +22,7 @@
 .walletButton svg {
   margin-right: 8px;
   color: var(--color-graphite);
+  vertical-align: middle;
 }
 
 .walletButton.open svg,
@@ -27,6 +36,20 @@
   border-radius: 8px;
   padding: 5px;
   z-index: 10;
+  min-width: 140px;
+}
+
+.popup::before {
+  content: '';
+  position: absolute;
+  top: -4px;
+  right: 16px;
+  display: block;
+  width: 0;
+  height: 0;
+  border-left: 4px solid transparent;
+  border-right: 4px solid transparent;
+  border-bottom: 4px solid var(--color-ink);
 }
 
 .item {
@@ -39,6 +62,7 @@
   align-items: center;
   padding: 8px;
   border-radius: 4px;
+  cursor: pointer;
 }
 
 .item:hover {
@@ -54,18 +78,57 @@
   padding: 0 7px;
   border: 0;
   border-radius: 8px;
-  margin-left: auto;
   display: block;
+  margin: 5px auto 10px;
+  cursor: pointer;
+}
+
+.hr {
+  display: block;
+  margin: 10px 0;
+  border: 0;
+  height: 1px;
+  background: var(--color-graphite);
 }
 
 .disconnectButton {
-  background-color: transparent;
-  color: var(--color-paper);
-  width: 100%;
-  border: none;
-  text-align: left;
+  margin-top: 8px;
+}
+
+.currency,
+.price {
+  padding: 0 8px;
+}
+
+.currency {
   display: flex;
   align-items: center;
-  padding: 8px;
-  border-radius: 4px;
+  justify-content: space-between;
+  font-size: 14px;
+  line-height: 14px;
+}
+
+.price {
+  font-size: 8px;
+  line-height: 12px;
+  text-align: left;
+  color: var(--color-graphite);
+}
+
+.balanceButton {
+  width: 16px;
+  height: 16px;
+  cursor: pointer;
+  background: transparent;
+  border: none;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--color-paper);
+  margin: 0 auto 10px;
+}
+
+.balanceButton:hover {
+  color: var(--color-parchment);
 }

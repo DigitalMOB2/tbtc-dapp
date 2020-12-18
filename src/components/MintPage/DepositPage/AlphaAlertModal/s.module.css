@@ -4,16 +4,55 @@
   left: 0;
   bottom: 0;
   right: 0;
-  background-color: rgba(153, 147, 144, 0.4);
+  background-color: rgba(var(--rgb-graphite), 0.4);
 }
 
 .modalContent {
   position: absolute;
   top: 50%;
-  transform: translateY(-50%);
   left: 50%;
-  transform: translateX(-50%);
+  transform: translate3d(-50%, -50%, 0);
   background-color: #fff;
   border: 1px solid var(--color-saffron);
-  border-radius: 8px;
+  border-radius: 16px;
+  padding: 28px;
+  width: 384px;
+}
+
+.description {
+  margin-bottom: 36px;
+  display: flex;
+}
+
+.description svg {
+  color: var(--color-saffron);
+  flex-shrink: 0;
+  margin-right: 16px;
+}
+
+.description p {
+  margin: 0;
+}
+
+.description a {
+  color: inherit;
+}
+
+.buttonsWrap {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.cancelButton {
+  background: var(--color-saffron) !important;
+  border-color: var(--color-saffron) !important;
+  min-width: 120px;
+}
+
+.confirmButton {
+  color: var(--color-saffron) !important;
+  border-color: var(--color-saffron) !important;
+  margin-left: 16px;
+  min-width: 120px;
 }

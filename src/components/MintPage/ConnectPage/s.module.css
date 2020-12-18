@@ -1,0 +1,174 @@
+.page {
+  padding: 32px;
+  min-height: 100%;
+  position: relative;
+}
+
+.title {
+  margin: 0 0 32px;
+}
+
+.container {
+  display: flex;
+}
+
+.content {
+  margin: 0 auto;
+  padding: 0 32px;
+  min-width: 500px;
+}
+
+.subtitle {
+  color: var(--color-graphite);
+  margin: 16px 0;
+}
+
+.animationWrap {
+  width: 300px;
+  height: 300px;
+  margin: 56px auto 24px;
+  position: relative;
+  overflow: hidden;
+}
+
+.animationWrap::after {
+  content: '';
+  display: block;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  position: absolute;
+  border-radius: 50%;
+  background: var(--color-paper);
+  opacity: 0.6;
+  animation: scale 6s linear infinite;
+  animation-direction: alternate;
+  transform-origin: center;
+  z-index: 1;
+}
+
+.loading {
+  width: 100%;
+  height: 100%;
+  color: var(--color-ink);
+  transform-origin: center;
+  animation: rotate 20s linear infinite;
+  z-index: 0;
+}
+
+.animationWrap.done .loading {
+  color: var(--color-mint);
+  animation: none;
+}
+
+.animationWrap.done::after {
+  display: none;
+}
+
+.doneIcon {
+  width: 126px;
+  height: 126px;
+  z-index: 2;
+  color: var(--color-ink);
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate3d(-50%, -50%, 0);
+}
+
+.downloadButton {
+  font-size: 8px;
+  font-weight: 500;
+  line-height: 15px;
+  letter-spacing: 0;
+  display: flex;
+  margin: 16px auto;
+}
+
+.warn {
+  display: flex;
+  align-items: center;
+  background: rgba(var(--rgb-dark-tangerine), 0.2);
+  border-radius: 8px;
+  padding: 16px;
+  margin: 0 0 32px;
+}
+
+.warnIcon {
+  color: var(--color-turmeric);
+}
+
+.warn p {
+  margin: 0 16px;
+}
+
+.closeWarnButton {
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  background: transparent;
+  color: var(--color-ink);
+  padding: 0;
+  border: none;
+  align-self: flex-start;
+  margin-left: auto;
+}
+
+.buttonsWrap {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  margin-top: 32px;
+}
+
+.buttonsWrap a {
+  flex-basis: 100%;
+}
+
+.buttonsWrap a + a {
+  margin-left: 16px;
+}
+
+.timeRemaining {
+  margin-top: 16px;
+  text-align: right;
+  color: var(--color-saffron);
+}
+
+.timeRemaining svg {
+  vertical-align: middle;
+  margin-right: 8px;
+}
+
+.amount {
+  font-size: 36px;
+  font-weight: 300;
+  text-align: center;
+  line-height: 48px;
+}
+
+.amount strong {
+  font-weight: 500;
+}
+
+@keyframes rotate {
+  0% {
+    transform: rotate(0);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes scale {
+  0% {
+    transform: scale(1.1);
+  }
+  100% {
+    transform: scale(0.4);
+  }
+}

@@ -3,6 +3,10 @@
   align-items: center;
   padding: 32px;
   grid-area: header;
+  background: var(--color-parchment);
+  position: sticky;
+  top: 0;
+  z-index: 1;
 }
 
 .heading {
