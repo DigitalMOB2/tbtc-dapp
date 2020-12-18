@@ -15,6 +15,9 @@
   --color-light-slate-blue: #a757f8;
 
   --rgb-mint: 11, 143, 120;
+  --rgb-graphite: 153, 147, 144;
+  --rgb-paper: 255, 253, 252;
+  --rgb-dark-tangerine: 252, 176, 28;
 }
 
 body {
@@ -48,7 +51,7 @@ body {
     'footer footer';
   grid-template-rows: min-content auto min-content;
   grid-template-columns: min-content auto;
-  height: 100vh;
+  min-height: 100vh;
 }
 
 #notifications-root {

@@ -4,7 +4,7 @@ import s from './s.module.css';
 export function Sidebar() {
   return (
     <aside className={s.sidebar}>
-      <nav>
+      <nav className={s.nav}>
         <NavLink exact to="/" className={s.link} activeClassName={s.activeLink}>
           OVERVIEW
         </NavLink>

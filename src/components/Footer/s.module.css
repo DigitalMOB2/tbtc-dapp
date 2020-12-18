@@ -39,4 +39,7 @@
   padding: 2px;
   display: flex;
   color: var(--color-ink);
+  position: fixed;
+  bottom: 16px;
+  right: 28px;
 }

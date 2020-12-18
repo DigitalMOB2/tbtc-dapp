@@ -1,3 +1,4 @@
+import cn from 'classnames';
 import { useWallet } from 'context/wallet';
 import { getEtherscanUrl } from 'utils/wallet';
 import { Svg } from 'components/Svg';
@@ -10,12 +11,17 @@ export function GenerateAddressModal() {
     <div className={s.modal}>
       <section className={s.modalContent}>
         <Svg id="keep-random-beacon" width="80" height="116" />
-        <h2>Generating Unique Address...</h2>
-        <p>Powered by the Keep Random Beacon</p>
+        <h2 className={cn('typography-h3', s.title)}>
+          Generating Unique Address...
+        </h2>
+        <p className={cn('typography-h6', s.description)}>
+          Powered by the Keep Random Beacon
+        </p>
         <a
           href={getEtherscanUrl(wallet.chainId, wallet.account)}
           target="_blank"
           rel="noopener noreferrer"
+          className="button secondary"
         >
           check etherscan ↗︎
         </a>

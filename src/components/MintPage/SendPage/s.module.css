@@ -1,0 +1,110 @@
+.page {
+  padding: 32px;
+  min-height: 100%;
+  position: relative;
+}
+
+.title {
+  margin: 0 0 32px;
+}
+
+.container {
+  display: flex;
+}
+
+.content {
+  margin: 0 auto;
+  padding: 0 32px;
+  min-width: 500px;
+}
+
+.warn {
+  display: flex;
+  align-items: center;
+  background: rgba(var(--rgb-dark-tangerine), 0.2);
+  border-radius: 8px;
+  padding: 16px;
+  margin: 0 0 32px;
+}
+
+.warnIcon {
+  color: var(--color-turmeric);
+}
+
+.warn p {
+  margin: 0 16px;
+}
+
+.closeWarnButton {
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  background: transparent;
+  color: var(--color-ink);
+  padding: 0;
+  border: none;
+  align-self: flex-start;
+  margin-left: auto;
+}
+
+.subtitle {
+  color: var(--color-graphite);
+  margin: 16px 0;
+}
+
+.amountWrap {
+  padding: 16px 16px 16px 32px;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border: 1px solid var(--color-parchment);
+  margin-bottom: 32px;
+}
+
+.inputWrap {
+  border: 1px solid var(--color-parchment);
+  border-radius: 8px;
+  position: relative;
+}
+
+.copyInput {
+  padding: 15px 90px 13px 15px;
+  font-family: inherit;
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 18px;
+  text-align: left;
+  background: transparent;
+  border: none;
+  width: 100%;
+}
+
+.copyButton {
+  position: absolute;
+  top: 50%;
+  right: 16px;
+  transform: translateY(-50%);
+  font-size: 8px !important;
+  padding: 3px 8px 2px !important;
+}
+
+.hint {
+  margin: 16px 0;
+  color: var(--color-graphite);
+}
+
+.hint svg {
+  vertical-align: middle;
+  margin-right: 4px;
+}
+
+.buttonsWrap {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  margin-top: 48px;
+}
