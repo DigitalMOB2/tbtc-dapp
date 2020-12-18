@@ -20,16 +20,16 @@ function copyNode(node) {
   selection.removeAllRanges();
 }
 
-export function copyToClipboard(text) {
+export function copyToClipboard(text, callback) {
   return new Promise((resolve, reject) => {
     try {
       const node = createNode(text);
       document.body.appendChild(node);
       copyNode(node);
       document.body.removeChild(node);
-      resolve();
+      resolve(callback(true));
     } catch (e) {
-      reject(e);
+      reject(callback(false));
     }
   });
 }

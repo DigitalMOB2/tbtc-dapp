@@ -3,6 +3,13 @@
   padding-right: 16px;
   grid-area: sidebar;
   padding-left: 32px;
+  background: var(--color-parchment);
+}
+
+.nav {
+  position: sticky;
+  top: 92px;
+  z-index: 1;
 }
 
 .link {

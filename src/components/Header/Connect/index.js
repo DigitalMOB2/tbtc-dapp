@@ -6,6 +6,7 @@ import { WalletContext } from 'context/wallet';
 import { formatEther } from '@ethersproject/units';
 import { copyToClipboard } from 'utils/copyToClipboard';
 import { useBalance } from 'hooks/wallet';
+import { Svg } from '../../Svg';
 import s from './s.module.css';
 
 /** @param {string|null|undefined} account */
@@ -20,6 +21,8 @@ function trimAddress(account) {
 export function Connect() {
   const walletContext = useContext(WalletContext);
   const [open, setOpen] = useState(false);
+  const [copied, setCopied] = useState(null);
+  const [showBalance, setShowBalance] = useState(false);
   const referenceElement = useRef(null);
   const popperElement = useRef(null);
   /** @type{{current: {remove: Function}|null}} */
@@ -47,6 +50,7 @@ export function Connect() {
         ['click', 'touchstart'],
         () => setOpen(false)
       );
+      setCopied(null);
     }
 
     return () => {
@@ -57,6 +61,12 @@ export function Connect() {
   }, [open, forceUpdate]);
 
   const isConnected = !!(walletContext.active || walletContext.error);
+
+  const handlerShowBalances = () => {
+    setShowBalance((prevState) => !prevState);
+  };
+
+  const protectValue = (value) => (showBalance ? value : '•••••••');
 
   return (
     <>
@@ -80,24 +90,48 @@ export function Connect() {
         style={{ ...styles.popper, visibility: open ? 'visible' : 'hidden' }}
         className={s.popup}
       >
-        <div>{walletContext.status === 'activating' ? 'loading...' : null}</div>
+        {/*<div>{walletContext.status === 'activating' ? <Spinner /> : null}</div>*/}
         {isConnected ? (
           <>
             <button
               type="button"
-              onClick={() => copyToClipboard(walletContext.account)}
+              onClick={() => copyToClipboard(walletContext.account, setCopied)}
               className={cn('typography-tiny-mono-text', s.copyButton)}
             >
-              COPY
+              {copied === null
+                ? 'COPY'
+                : copied === true
+                ? 'COPIED!'
+                : 'NOT COPIED!'}
             </button>
-            <hr />
-            <div>
-              {ethBalance === undefined
-                ? '...'
-                : ethBalance === null
-                ? 'Error'
-                : `Ξ ${parseFloat(formatEther(ethBalance)).toPrecision(4)}`}
+            <hr className={s.hr} />
+            <button
+              type="button"
+              className={s.balanceButton}
+              onClick={handlerShowBalances}
+            >
+              <span className="visually-hidden">
+                {showBalance ? 'Hide balances' : 'Show balances'}
+              </span>
+              {showBalance ? (
+                <Svg id="eye-closed" width={14} height={14} />
+              ) : (
+                <Svg id="eye" width={12} height={8} />
+              )}
+            </button>
+            <div className={s.currency}>
+              <span>
+                {ethBalance === undefined
+                  ? '...'
+                  : ethBalance === null
+                  ? 'Error'
+                  : protectValue(
+                      parseFloat(formatEther(ethBalance)).toPrecision(4)
+                    )}
+              </span>
+              <span>{protectValue('ETH')}</span>
             </div>
+            {/*<div className={s.price}>{protectValue('$4670.35')}</div>*/}
           </>
         ) : (
           <>
@@ -126,7 +160,7 @@ export function Connect() {
         {walletContext.active || walletContext.error ? (
           <button
             type="button"
-            className={s.item}
+            className={cn(s.item, s.disconnectButton)}
             onClick={() => {
               walletContext.disconnect();
             }}
