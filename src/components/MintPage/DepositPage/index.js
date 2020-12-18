@@ -1,17 +1,14 @@
 import { useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import cn from 'classnames';
-import BigNumber from 'bignumber.js';
 import { EthereumHelpers } from '@keep-network/tbtc.js';
 
-import { useTBTCContract } from 'hooks/wallet';
 import { Dropdown } from '../../Dropdown';
 import { Checklist } from '../../Checklist';
 import { Amount } from '../../Amount';
 import { Check } from '../../Check';
 import { Progress } from '../../Progress';
 import { AlphaAlertModal } from './AlphaAlertModal';
-import { GenerateAddressModal } from './GenerateAddressModal';
 import s from './s.module.css';
 import { useMint } from '..';
 import { useGeneral } from 'context/general';
@@ -38,7 +35,10 @@ const options = [
 ];
 
 export default function MintPage() {
-  const systemContract = useSystemContract();
+  const {
+    read: systemContractRead,
+    contract: systemContract,
+  } = useSystemContract();
   const depositFactoryContract = useDepositFactoryContract();
 
   const { web3 } = useWallet();
@@ -46,27 +46,20 @@ export default function MintPage() {
   const history = useHistory();
   const { notifications } = useGeneral();
   const [selected, setSelected] = useState(options[0]);
+  /** @type {[string[], React.Dispatch<React.SetStateAction<string[]>>]} */
   const [amounts, setAmounts] = useState([]);
+  /** @type {[string|undefined, React.Dispatch<React.SetStateAction<string|undefined>>]} */
   const [selectedAmount, setSelectedAmount] = useState();
   const [displayAlphaAlert, setDisplayAlphaAlert] = useState(false);
-  const [displayGenerateAddress, setDisplayGenerateAddress] = useState(false);
-
-  const tbtc = useTBTCContract();
-
-  // useEffect(() => {
-  //   if (tbtc) {
-  //     tbtc.Deposit.availableSatoshiLotSizes().then(setAmounts);
-  //   }
-  // }, [tbtc]);
 
   useEffect(() => {
-    systemContract
-      .read(['getAllowedLotSizes'])
-      .then(([allowedLotSizes, newDepositFeeEstimate]) => {
+    systemContractRead(['getAllowedLotSizes']).then(
+      ([allowedLotSizes, newDepositFeeEstimate]) => {
         setAmounts(allowedLotSizes);
         console.log({ allowedLotSizes, newDepositFeeEstimate });
-      });
-  }, [systemContract.read]);
+      }
+    );
+  }, [systemContractRead]);
 
   const handlerDropdown = (value) => {
     setSelected(value);
@@ -77,25 +70,12 @@ export default function MintPage() {
     setDisplayAlphaAlert(true);
   };
 
-  // console.log('systemContract.contract', systemContract.contract);
-
   const deposit = async () => {
-    // setDisplayAlphaAlert(false);
-    // if (tbtc && selectedAmount) {
-    //   setDisplayGenerateAddress(true);
-    //   tbtc.Deposit.withSatoshiLotSize(selectedAmount)
-    //     .then((depositResponse) => {
-    //       console.log({ depositResponse });
-    //       mintContext.setDeposit(depositResponse);
-    //       history.push(`/mint/${depositResponse.address}`);
-    //     })
-    //     .catch((err) => {
-    //       notifications.addNotification(err.message, { level: 'error' });
-    //     })
-    //     .finally(() => setDisplayGenerateAddress(false));
-    // }
+    if (!selectedAmount) {
+      return;
+    }
 
-    const [newDepositFeeEstimate] = await systemContract.read([
+    const [newDepositFeeEstimate] = await systemContractRead([
       'getNewDepositFeeEstimate',
     ]);
     console.log({ newDepositFeeEstimate });
@@ -110,13 +90,10 @@ export default function MintPage() {
       const createdEvent = EthereumHelpers.readEventFromTransaction(
         web3,
         depositResponse,
-        systemContract.contract,
+        systemContract,
         'Created'
       );
 
-      console.log({ createdEvent });
-
-      // mintContext.setDeposit(depositResponse);
       mintContext.setEvents((prevEvents) => ({
         ...prevEvents,
         [createdEvent._depositContractAddress]: createdEvent,
@@ -124,8 +101,6 @@ export default function MintPage() {
       history.push(`/mint/${createdEvent._depositContractAddress}`);
     } catch (err) {
       notifications.addNotification(err.message, { level: 'error' });
-    } finally {
-      setDisplayGenerateAddress(false);
     }
   };
 
@@ -196,7 +171,6 @@ export default function MintPage() {
           cancel={() => setDisplayAlphaAlert(false)}
         />
       )}
-      {displayGenerateAddress && <GenerateAddressModal />}
     </div>
   );
 }

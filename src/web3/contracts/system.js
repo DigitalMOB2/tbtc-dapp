@@ -29,7 +29,7 @@ export function useSystemContract() {
   const read = useCallback(
     /**
      * @param {TMethodName[]} data
-     * @returns {Promise<string[]>}
+     * @returns {Promise<any[]>}
      */
     (data) => {
       const configs = data.reduce((acc, methodName) => {
