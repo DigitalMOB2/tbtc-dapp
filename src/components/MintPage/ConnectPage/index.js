@@ -5,6 +5,7 @@ import cn from 'classnames';
 import { Svg } from 'components/Svg';
 import { Progress } from 'components/Progress';
 import { Steps } from './Steps';
+import { StatusIndicator } from 'components/StatusIndicator';
 import s from './s.module.css';
 
 export default function ConnectPage() {
@@ -20,10 +21,9 @@ export default function ConnectPage() {
       </h2>
       <div className={s.container}>
         <div className={s.content}>
-          <div className={cn(s.animationWrap, { [s.done]: state === 'done' })}>
-            <Svg id="loading-animation" className={s.loading} />
+          <StatusIndicator animate={state !== 'done'}>
             {state === 'done' ? <Svg id="ink" className={s.doneIcon} /> : null}
-          </div>
+          </StatusIndicator>
           {state === 'confirming' || state === 'confirmed' ? (
             <Steps currentStepIdx={6} />
           ) : (
