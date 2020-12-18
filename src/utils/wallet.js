@@ -39,7 +39,7 @@ export function getErrorMessage(error) {
 }
 
 export function formatSatsToBtc(sats) {
-  return new BigNumber(sats.toString())
+  return new BigNumber(sats)
     .div(BitcoinHelpers.satoshisPerBtc.toString())
     .toString();
 }

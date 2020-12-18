@@ -30,6 +30,10 @@ export const WalletContext = createContext({
   active: false,
   /** @type {Error|undefined} */
   error: undefined,
+  /** @type {Web3|undefined} */
+  web3: undefined,
+  /** @type {Web3|undefined} */
+  provider: undefined,
 
   /** @type {Function} */
   injected: () => null,
@@ -48,6 +52,9 @@ export function WalletProvider({ children }) {
     loading: false,
     loaded: false,
   });
+
+  /** @type {[Object, React.Dispatch<React.SetStateAction<Object|undefined>>]} */
+  const [provider, setProvider] = useState();
 
   const web3React = useWeb3React();
   const {
@@ -88,6 +95,7 @@ export function WalletProvider({ children }) {
       .then(() => {
         // console.log({ currentConnector });
         setSessionProvider(name);
+        currentConnector.getProvider().then(setProvider);
       })
       .catch((error) => {
         console.log({ error });
@@ -141,6 +149,8 @@ export function WalletProvider({ children }) {
         account,
         status,
         connector,
+        web3: library,
+        provider,
         // connectionStatus,
 
         injected: () => connect('injected'),

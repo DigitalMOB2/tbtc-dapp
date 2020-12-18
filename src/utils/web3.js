@@ -1,4 +1,5 @@
 import BigNumber from 'bignumber.js';
+import { BitcoinHelpers } from '@keep-network/tbtc.js';
 
 /**
  * @param {number} [chainId]
@@ -58,4 +59,17 @@ export function getExponentValue(decimals = 0) {
  */
 export function getHumanValue(value, decimals = 0) {
   return value?.div(getExponentValue(decimals));
+}
+
+export function getBitcoinNetwork(
+  chainId = Number(process.env.REACT_APP_WEB3_CHAIN_ID)
+) {
+  switch (chainId) {
+    case 1:
+      return BitcoinHelpers.Network.MAINNET;
+    case 3:
+      return BitcoinHelpers.Network.TESTNET;
+    default:
+      return BitcoinHelpers.Network.TESTNET;
+  }
 }

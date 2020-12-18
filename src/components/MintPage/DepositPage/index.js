@@ -1,6 +1,8 @@
 import { useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import cn from 'classnames';
+import BigNumber from 'bignumber.js';
+import { EthereumHelpers } from '@keep-network/tbtc.js';
 
 import { useTBTCContract } from 'hooks/wallet';
 import { Dropdown } from '../../Dropdown';
@@ -13,6 +15,9 @@ import { GenerateAddressModal } from './GenerateAddressModal';
 import s from './s.module.css';
 import { useMint } from '..';
 import { useGeneral } from 'context/general';
+import { useSystemContract } from 'web3/contracts/system';
+import { useDepositFactoryContract } from 'web3/contracts/depositFactory';
+import { useWallet } from 'context/wallet';
 
 const options = [
   {
@@ -33,6 +38,10 @@ const options = [
 ];
 
 export default function MintPage() {
+  const systemContract = useSystemContract();
+  const depositFactoryContract = useDepositFactoryContract();
+
+  const { web3 } = useWallet();
   const mintContext = useMint();
   const history = useHistory();
   const { notifications } = useGeneral();
@@ -44,20 +53,23 @@ export default function MintPage() {
 
   const tbtc = useTBTCContract();
 
+  // useEffect(() => {
+  //   if (tbtc) {
+  //     tbtc.Deposit.availableSatoshiLotSizes().then(setAmounts);
+  //   }
+  // }, [tbtc]);
+
   useEffect(() => {
-    if (tbtc) {
-      tbtc.Deposit.availableSatoshiLotSizes().then((vals) => {
-        setAmounts(vals);
+    systemContract
+      .read(['getAllowedLotSizes'])
+      .then(([allowedLotSizes, newDepositFeeEstimate]) => {
+        setAmounts(allowedLotSizes);
+        console.log({ allowedLotSizes, newDepositFeeEstimate });
       });
-    }
-  }, [tbtc]);
+  }, [systemContract.read]);
 
   const handlerDropdown = (value) => {
     setSelected(value);
-  };
-
-  const handlerAmount = (value) => {
-    setSelectedAmount(value);
   };
 
   const submitHandler = (e) => {
@@ -65,20 +77,55 @@ export default function MintPage() {
     setDisplayAlphaAlert(true);
   };
 
-  const deposit = () => {
-    setDisplayAlphaAlert(false);
-    if (tbtc && selectedAmount) {
-      setDisplayGenerateAddress(true);
-      tbtc.Deposit.withSatoshiLotSize(selectedAmount)
-        .then((depositResponse) => {
-          console.log({ depositResponse });
-          mintContext.setDeposit(depositResponse);
-          history.push(`/mint/${depositResponse.address}`);
-        })
-        .catch((err) => {
-          notifications.addNotification(err.message, { level: 'error' });
-        })
-        .finally(() => setDisplayGenerateAddress(false));
+  // console.log('systemContract.contract', systemContract.contract);
+
+  const deposit = async () => {
+    // setDisplayAlphaAlert(false);
+    // if (tbtc && selectedAmount) {
+    //   setDisplayGenerateAddress(true);
+    //   tbtc.Deposit.withSatoshiLotSize(selectedAmount)
+    //     .then((depositResponse) => {
+    //       console.log({ depositResponse });
+    //       mintContext.setDeposit(depositResponse);
+    //       history.push(`/mint/${depositResponse.address}`);
+    //     })
+    //     .catch((err) => {
+    //       notifications.addNotification(err.message, { level: 'error' });
+    //     })
+    //     .finally(() => setDisplayGenerateAddress(false));
+    // }
+
+    const [newDepositFeeEstimate] = await systemContract.read([
+      'getNewDepositFeeEstimate',
+    ]);
+    console.log({ newDepositFeeEstimate });
+
+    try {
+      const depositResponse = await depositFactoryContract.createDeposit(
+        selectedAmount,
+        newDepositFeeEstimate
+      );
+      console.log({ depositResponse });
+
+      const createdEvent = EthereumHelpers.readEventFromTransaction(
+        web3,
+        depositResponse,
+        systemContract.contract,
+        'Created'
+      );
+
+      console.log({ createdEvent });
+
+      // mintContext.setDeposit(depositResponse);
+      mintContext.setEvents((prevEvents) => ({
+        ...prevEvents,
+        [createdEvent._depositContractAddress]: createdEvent,
+      }));
+      history.push(`/mint/${createdEvent._depositContractAddress}`);
+    } catch (err) {
+      notifications.addNotification(err.message, { level: 'error' });
+    } finally {
+      setDisplayGenerateAddress(false);
     }
   };
 
@@ -100,12 +147,12 @@ export default function MintPage() {
             values={amounts}
             currency="BTC"
             selected={selectedAmount}
-            callback={handlerAmount}
+            callback={setSelectedAmount}
           />
         </div>
         <form className={s.block} onSubmit={submitHandler}>
           <h3 className={cn('typography-h5', s.blockTitle)}>Review</h3>
-          <Check />
+          <Check amount={selectedAmount} />
           <div className={s.buttonsWrap}>
             <button
               type="button"
@@ -149,12 +196,7 @@ export default function MintPage() {
           cancel={() => setDisplayAlphaAlert(false)}
         />
       )}
-      {displayGenerateAddress && (
-        <GenerateAddressModal
-          ok={deposit}
-          cancel={() => setDisplayAlphaAlert(false)}
-        />
-      )}
+      {displayGenerateAddress && <GenerateAddressModal />}
     </div>
   );
 }

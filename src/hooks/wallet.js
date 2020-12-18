@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useWeb3React } from '@web3-react/core';
 import TBTC, { BitcoinHelpers } from '@keep-network/tbtc.js';
+import { getBitcoinNetwork } from 'utils/web3';
 
 // fetch eth balance of the connected account
 export function useBalance() {
@@ -96,23 +97,10 @@ export function useTBTCContract() {
         // library.eth.defaultAccount = accounts[0];
         library.eth.defaultAccount = await connector.getAccount();
 
-        let bitcoinNetwork;
-
-        switch (chainId) {
-          case 1:
-            bitcoinNetwork = BitcoinHelpers.Network.MAINNET;
-            break;
-          case 3:
-            bitcoinNetwork = BitcoinHelpers.Network.TESTNET;
-            break;
-          default:
-            bitcoinNetwork = BitcoinHelpers.Network.TESTNET;
-        }
-
         try {
           const tbtc = await TBTC.withConfig({
             web3: library,
-            bitcoinNetwork,
+            bitcoinNetwork: getBitcoinNetwork(chainId),
             electrum: config[chainId],
           });
 

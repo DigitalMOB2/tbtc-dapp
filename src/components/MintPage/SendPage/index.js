@@ -1,49 +1,122 @@
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { useParams, Redirect } from 'react-router-dom';
+// import BigNumber from 'bignumber.js';
 import QR from 'qrcode.react';
-import { useTBTCContract } from 'hooks/wallet';
+// import { useTBTCContract } from 'hooks/wallet';
 import { formatSatsToBtc, getEtherscanUrl } from 'utils/wallet';
 import { copyToClipboard } from 'utils/copyToClipboard';
 import { Svg } from 'components/Svg';
 import { useMint } from '..';
 import { useWallet } from 'context/wallet';
+import { useSystemContract } from 'web3/contracts/system';
+import { EthereumHelpers } from '@keep-network/tbtc.js';
+import { useDepositContract } from 'web3/contracts/deposit';
+
+/** @typedef {import('..').TEvent} TEvent */
 
 export default function SendPage() {
   const wallet = useWallet();
-  let { address } = useParams();
+  const systemContract = useSystemContract();
+  /** @type {{ address: string }} */
+  let { address: depositAddress } = useParams();
+  const { read: readDepositContract, getBitcoinAddress } = useDepositContract(
+    depositAddress
+  );
   const mintContext = useMint();
   // const { state } = useLocation();
-  const tbtc = useTBTCContract();
-  const [deposit, setDeposit] = useState(mintContext.deposit);
-  const [lotSize, setLotSize] = useState(0);
+  // const tbtc = useTBTCContract();
+  // /** @type {[import('@keep-network/tbtc.js').Deposit|null|undefined, React.Dispatch<React.SetStateAction<import('@keep-network/tbtc.js').Deposit|null|undefined>>]} */
+  // const [deposit, setDeposit] = useState(mintContext.deposit);
+  /** @type {[TEvent|null|undefined, React.Dispatch<React.SetStateAction<TEvent|null|undefined>>]} */
+  const [event, setEvent] = useState(mintContext.events[depositAddress]);
+  /** @type {[string, React.Dispatch<React.SetStateAction<string>>]} */
+  const [lotSize, setLotSize] = useState('');
+
+  // useEffect(() => {
+  //   if (tbtc && !mintContext.deposit) {
+  //     tbtc.Deposit.withAddress(depositAddress)
+  //       .then((resp) => {
+  //         console.log({ resp });
+  //         setDeposit(resp);
+  //       })
+  //       .catch((e) => {
+  //         console.error({ e });
+  //         setDeposit(null);
+  //       });
+  //   }
+  // }, [depositAddress, tbtc, mintContext.deposit]);
+
+  // useEffect(() => {
+  //   if (deposit) {
+  //     deposit.getLotSizeSatoshis().then(setLotSize);
+
+  //     deposit.onBitcoinAddressAvailable(async (address) => {
+  //       const lotSize = await deposit.getLotSizeSatoshis();
+  //       console.log(
+  //         '\tGot deposit address:',
+  //         address,
+  //         '; fund with:',
+  //         lotSize.toString(),
+  //         'satoshis please.'
+  //       );
+  //       console.log('Now monitoring for deposit transaction...');
+  //     });
+  //     deposit.onActive(async (deposit) => {
+  //       console.log('Deposit is active, minting...');
+  //       const tbtcBits = await deposit.mintTBTC();
+  //       console.log(`Minted ${tbtcBits} TBTC bits!`);
+  //       // or if you want some TDT action
+  //       // deposit.depositTokenContract.transfer(someLuckyContract)
+  //     });
+
+  //     deposit.autoSubmit();
+  //   }
+  // }, [deposit]);
 
   useEffect(() => {
-    if (tbtc && !mintContext.deposit) {
-      tbtc.Deposit.withAddress(address)
+    if (event) {
+      readDepositContract(['lotSizeSatoshis']).then(([lss]) => {
+        setLotSize(lss);
+      });
+      console.log({ event });
+      getBitcoinAddress({
+        blockNumber: event.blockNumber,
+      })
         .then((resp) => {
-          console.log({ resp });
-          setDeposit(resp);
+          console.log(resp);
         })
-        .catch((e) => {
-          console.error({ e });
-          setDeposit(null);
+        .catch((er) => {
+          console.error(er);
         });
+    } else {
+      (async () => {
+        try {
+          const createdEvent = await EthereumHelpers.getExistingEvent(
+            systemContract.contract,
+            'Created',
+            { _depositContractAddress: depositAddress }
+          );
+          // console.log({ createdEvent });
+          setEvent(createdEvent);
+        } catch (e) {
+          console.error({ e });
+          setEvent(null);
+        }
+      })();
     }
-  }, [address, tbtc, mintContext.deposit]);
+  }, [
+    readDepositContract,
+    getBitcoinAddress,
+    event,
+    depositAddress,
+    systemContract.contract,
+  ]);
 
-  useEffect(() => {
-    if (deposit) {
-      deposit.getLotSizeSatoshis().then(setLotSize);
-    }
-  }, [deposit]);
-
-  window.deposit = deposit;
-
-  if (deposit === null) {
-    return <Redirect to="/" />;
+  if (event === null) {
+    return <Redirect to="/mint" />;
   }
 
-  if (deposit === undefined) {
+  if (event === undefined) {
     return <>'loading...'</>;
   }
 
@@ -61,15 +134,15 @@ export default function SendPage() {
       <div>
         {amountInBtc} ฿TC
         <QR
-          value={`bitcoin:${address}?amount=${amountInBtc}&label=Single-Use+tBTC+Deposit+Wallet`}
+          value={`bitcoin:${depositAddress}?amount=${amountInBtc}&label=Single-Use+tBTC+Deposit+Wallet`}
           renderAs="svg"
           size={225}
         />
       </div>
       <h3>Send to Address</h3>
       <div>
-        {address}
-        <button type="button" onClick={() => copyToClipboard(address)}>
+        {depositAddress}
+        <button type="button" onClick={() => copyToClipboard(depositAddress)}>
           COPY
         </button>
       </div>

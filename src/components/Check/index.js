@@ -1,12 +1,13 @@
+import { formatSatsToBtc } from 'utils/wallet';
 import { Tooltip } from './Tooltip';
 import s from './s.module.css';
 
-export const Check = () => {
+export const Check = ({ amount, signerFeeTBTC }) => {
   return (
     <div className={s.wrap}>
       <div className={s.mainRow}>
         <div className={s.value} data-subvalue="~$4670.35">
-          <strong>0.1</strong> ฿TC
+          <strong>{formatSatsToBtc(amount ?? 0)}</strong> ฿TC
         </div>
         <svg width="22" height="37" className={s.arrow}>
           <use xlinkHref="/sprite.svg#arrow-right-currency" />

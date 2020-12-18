@@ -4,7 +4,7 @@
   "dependencies": {
     "@ethersproject/providers": "^5.0.17",
     "@ethersproject/units": "^5.0.8",
-    "@keep-network/tbtc.js": "^0.18.0-rc.1",
+    "@keep-network/tbtc.js": "0.18.0-rc.1",
     "@popperjs/core": "^2.5.4",
     "@web3-react/core": "^6.1.1",
     "@web3-react/injected-connector": "^6.0.7",
