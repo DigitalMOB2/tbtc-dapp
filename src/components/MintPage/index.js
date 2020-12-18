@@ -26,7 +26,7 @@ export default function MintPage() {
         <Route exact path="/mint" component={DepositPage} />
         <Route path="/mint/connect" component={ConnectPage} />
         <Route path="/mint/:address" component={SendPage} />
-        <Redirect to="/" />
+        <Redirect to="/mint" />
       </Switch>
     </MintContext.Provider>
   );
