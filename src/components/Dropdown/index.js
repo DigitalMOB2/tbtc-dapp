@@ -2,16 +2,15 @@ import { useState, useRef, useEffect, useCallback } from 'react';
 import cn from 'classnames';
 import outy from 'outy';
 
+import { Svg } from '../Svg';
 import s from './s.module.css';
 
-const getItemNode = ({ level, children }) => {
+const getItemNode = ({ level, children, icon }) => {
   switch (level) {
     case 'error':
       return (
         <div className={s.itemString}>
-          <svg width="10" height="10" className={cn(s.icon, s.red)}>
-            <use xlinkHref="/sprite.svg#error" />
-          </svg>
+          {icon ? <Svg {...icon} className={cn(s.icon, s.red)} /> : null}
           <span>{children}</span>
           <span className={cn(s.secondaryText, s.red)}>ERRORS!</span>
         </div>
@@ -19,9 +18,7 @@ const getItemNode = ({ level, children }) => {
     case 'warning':
       return (
         <span className={s.itemString}>
-          <svg width="10" height="10" className={cn(s.icon, s.yellow)}>
-            <use xlinkHref="/sprite.svg#sign" />
-          </svg>
+          {icon ? <Svg {...icon} className={cn(s.icon, s.yellow)} /> : null}
           <span>{children}</span>
           <span className={cn(s.secondaryText, s.yellow)}>PLEASE SIGN</span>
         </span>
@@ -29,9 +26,14 @@ const getItemNode = ({ level, children }) => {
     case 'normal':
       return (
         <span className={s.itemString}>
-          <svg width="10" height="10" className={cn(s.icon, s.green)}>
-            <use xlinkHref="/sprite.svg#circle" />
-          </svg>
+          {icon ? <Svg {...icon} className={cn(s.icon, s.green)} /> : null}
+          <span>{children}</span>
+        </span>
+      );
+    case 'default':
+      return (
+        <span className={s.itemString}>
+          {icon ? <Svg {...icon} className={cn(s.icon, s.black)} /> : null}
           <span>{children}</span>
         </span>
       );
@@ -40,7 +42,7 @@ const getItemNode = ({ level, children }) => {
   }
 };
 
-export const Dropdown = ({ options, selected, callback }) => {
+export const Dropdown = ({ options, selected, className, callback }) => {
   const [show, setShow] = useState(false);
   const dropdownRef = useRef(null);
 
@@ -103,7 +105,7 @@ export const Dropdown = ({ options, selected, callback }) => {
   };
 
   return (
-    <div ref={dropdownRef} className={s.wrap} role="radiogroup">
+    <div ref={dropdownRef} className={cn(s.wrap, className)} role="radiogroup">
       <select value={selected.value} readOnly className={s.select}>
         {options.map(({ children, value }) => (
           <option key={value} value={value}>
@@ -120,9 +122,12 @@ export const Dropdown = ({ options, selected, callback }) => {
         onKeyPress={handlerToggleKeyPress}
       >
         {getItemNode(selected)}
-        <svg width="14" height="14" className={s.dropdownArrow}>
-          <use xlinkHref="/sprite.svg#dropdown-arrow" />
-        </svg>
+        <Svg
+          id="dropdown-arrow"
+          width={14}
+          height={14}
+          className={s.dropdownArrow}
+        />
       </div>
       <div className={cn(s.items, { [s.hidden]: !show })}>
         {options.map((item) => {

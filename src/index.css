@@ -144,3 +144,17 @@ footer {
 .button.secondary[disabled]:hover {
   background: inherit;
 }
+
+.page {
+  padding: 32px;
+  min-height: 100%;
+  position: relative;
+}
+
+.heading {
+  margin-bottom: 32px;
+  text-align: left;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}

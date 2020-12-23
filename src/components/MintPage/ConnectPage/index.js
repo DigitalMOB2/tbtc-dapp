@@ -4,8 +4,9 @@ import cn from 'classnames';
 
 import { Svg } from 'components/Svg';
 import { Progress } from 'components/Progress';
-import { Steps } from './Steps';
+import { Steps } from 'components/Steps';
 import { StatusIndicator } from 'components/StatusIndicator';
+
 import s from './s.module.css';
 
 export default function ConnectPage() {
@@ -13,12 +14,14 @@ export default function ConnectPage() {
   const [state, setState] = useState('done'); // 'confirming' | 'confirmed' | 'done';
 
   return (
-    <div className={s.page}>
-      <h2 className={cn('typography-h2', s.title)}>
-        {state === 'confirming' ? 'Confirming Sent Bitcoin' : null}
-        {state === 'confirmed' ? 'Confirmations Completed' : null}
-        {state === 'done' ? 'Success! You’ve got TBTC.' : null}
-      </h2>
+    <div className="page">
+      <div className="heading">
+        <h2 className="typography-h2">
+          {state === 'confirming' ? 'Confirming Sent Bitcoin' : null}
+          {state === 'confirmed' ? 'Confirmations Completed' : null}
+          {state === 'done' ? 'Success! You’ve got TBTC.' : null}
+        </h2>
+      </div>
       <div className={s.container}>
         <div className={s.content}>
           <StatusIndicator animate={state !== 'done'}>

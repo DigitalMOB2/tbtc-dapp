@@ -1,5 +1,6 @@
 import { createContext, useContext, useState } from 'react';
 import { Switch, Route, Redirect } from 'react-router-dom';
+
 import DepositPage from 'components/MintPage/DepositPage';
 import SendPage from 'components/MintPage/SendPage';
 import ConnectPage from 'components/MintPage/ConnectPage';

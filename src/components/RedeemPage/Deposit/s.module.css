@@ -1,0 +1,89 @@
+.searchLabel {
+  color: var(--color-graphite);
+  margin-bottom: 4px;
+  display: inline-block;
+  letter-spacing: 0;
+}
+
+.searchWrap {
+  position: relative;
+  border: 1px solid var(--color-graphite);
+  border-radius: 4px;
+  overflow: hidden;
+  margin-bottom: 40px;
+}
+
+.searchIcon {
+  position: absolute;
+  top: 50%;
+  left: 12px;
+  color: var(--color-ink);
+  pointer-events: none;
+  transform: translateY(-50%);
+  width: 15px;
+  height: 14px;
+}
+
+.searchInput {
+  width: 100%;
+  border: 0;
+  background: transparent;
+  padding: 8px 24px 8px 40px;
+  font: inherit;
+  font-size: 16px;
+  line-height: 20px;
+  font-feature-settings: 'tnum' on, 'lnum' on;
+  color: var(--color-ink);
+}
+
+.container {
+  display: flex;
+  align-items: flex-start;
+}
+
+.inner {
+  margin: 0 auto;
+  max-width: 376px;
+}
+
+.depositCard {
+  margin-bottom: 16px;
+  cursor: default;
+}
+
+.bill {
+  margin-bottom: 16px;
+}
+
+.warn {
+  border-radius: 8px;
+  background: rgba(var(--rgb-dark-tangerine), 0.2);
+  padding: 8px;
+  display: flex;
+  align-items: center;
+}
+
+.warn svg {
+  color: var(--color-pumpkin);
+  margin-right: 8px;
+  flex-shrink: 0;
+}
+
+.warn p {
+  margin: 0;
+  font-size: 8px;
+  line-height: 10px;
+}
+
+.buttonsWrap {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 26px;
+}
+
+.subTitle {
+  margin-bottom: 16px;
+  color: var(--color-graphite);
+  letter-spacing: 0;
+}
