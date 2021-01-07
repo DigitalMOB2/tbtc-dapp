@@ -145,6 +145,26 @@ footer {
   background: inherit;
 }
 
+.button.secondary-red {
+  background: var(--color-paper);
+  border: 1px solid var(--color-saffron);
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 18px;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: var(--color-saffron);
+  padding: 6px 12px;
+}
+
+.button.secondary-red:hover {
+  opacity: 0.8;
+}
+
+.button.secondary-red[disabled]:hover {
+  background: inherit;
+}
+
 .page {
   padding: 32px;
   min-height: 100%;

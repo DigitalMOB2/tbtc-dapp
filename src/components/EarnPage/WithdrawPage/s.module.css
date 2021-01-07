@@ -1,0 +1,102 @@
+.container {
+  max-width: 704px;
+  margin: 0 auto;
+}
+
+.subtitle {
+  color: var(--color-graphite);
+  margin: 0 0 4px;
+  letter-spacing: 0;
+  display: block;
+}
+
+.currency {
+  font-size: 24px;
+  font-weight: 500;
+  line-height: 28px;
+  color: var(--color-turmeric);
+}
+
+.apy {
+  font-size: 8px;
+  line-height: 12px;
+  margin-bottom: 40px;
+}
+
+.inputWrap {
+  position: relative;
+  border-radius: 8px;
+  border: 1px solid var(--color-graphite);
+  overflow: hidden;
+  display: flex;
+  margin: 0 0 14px;
+}
+
+.amountInput {
+  font-family: inherit;
+  font-size: 36px;
+  font-weight: 500;
+  line-height: 48px;
+  padding: 10px 128px 10px 16px;
+  background: transparent;
+  border: none;
+  width: 100%;
+}
+
+.tbtc {
+  background: var(--color-parchment);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 16px;
+  font-size: 36px;
+  font-weight: 300;
+  line-height: 54px;
+}
+
+.checkboxWrap {
+  display: flex;
+  align-items: center;
+  margin: 0 16px 32px;
+}
+
+.checkboxIcon {
+  flex-shrink: 1;
+  margin-right: 8px;
+}
+
+.walletIcon {
+  padding: 0 10px;
+  color: var(--color-graphite);
+  background: var(--color-parchment);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.walletInput {
+  width: 100%;
+  font-family: inherit;
+  font-size: 18px;
+  line-height: 27px;
+  text-align: left;
+  background: var(--color-parchment);
+  border: none;
+  padding: 8px;
+  color: var(--color-graphite);
+}
+
+.buttonsWrap {
+  margin: 100px 0 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.button {
+  min-width: 140px;
+}
+
+.button + .button {
+  margin-left: 16px;
+}

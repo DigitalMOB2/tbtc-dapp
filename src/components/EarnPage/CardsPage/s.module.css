@@ -1,0 +1,66 @@
+.wrap {
+  padding: 64px;
+}
+
+.card {
+  display: flex;
+  flex-direction: column;
+  border: 1px solid var(--color-parchment);
+  padding: 32px;
+  border-radius: 8px;
+}
+
+.card + .card {
+  margin-top: 32px;
+}
+
+.heading {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin: 0 0 76px;
+}
+
+.pool {
+  font-size: 24px;
+  font-weight: 500;
+  line-height: 28px;
+  color: var(--color-ink);
+  margin: 0;
+}
+
+.apy {
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 20px;
+  color: var(--color-graphite);
+}
+
+.currency {
+  font-size: 54px;
+  font-weight: 700;
+  line-height: 54px;
+  text-align: center;
+  color: var(--color-ink);
+}
+
+.currency.orange {
+  color: var(--color-turmeric);
+}
+
+.currency.green {
+  color: var(--color-mint);
+}
+
+.principle {
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 15px;
+  text-align: center;
+  color: var(--color-graphite);
+}
+
+.investButton {
+  margin: 32px auto 0;
+  min-width: 172px;
+}
