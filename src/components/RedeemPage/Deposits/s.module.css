@@ -1,0 +1,88 @@
+.searchLabel {
+  color: var(--color-graphite);
+  margin-bottom: 4px;
+  display: inline-block;
+  letter-spacing: 0;
+}
+
+.searchWrap {
+  position: relative;
+  border: 1px solid var(--color-graphite);
+  border-radius: 4px;
+  overflow: hidden;
+  margin-bottom: 40px;
+}
+
+.searchIcon {
+  position: absolute;
+  top: 50%;
+  left: 12px;
+  color: var(--color-ink);
+  pointer-events: none;
+  transform: translateY(-50%);
+  width: 15px;
+  height: 14px;
+}
+
+.searchInput {
+  width: 100%;
+  border: 0;
+  background: transparent;
+  padding: 8px 24px 8px 40px;
+  font: inherit;
+  font-size: 16px;
+  line-height: 20px;
+  font-feature-settings: 'tnum' on, 'lnum' on;
+  color: var(--color-ink);
+}
+
+.container {
+  display: flex;
+}
+
+.depositsWrap {
+  flex-basis: 50%;
+  flex-grow: 1;
+  padding: 20px 32px;
+}
+
+.depositsWrap:first-of-type {
+  padding-left: 0;
+}
+
+.depositsWrap:last-of-type {
+  padding-right: 0;
+}
+
+.depositsWrap + .depositsWrap {
+  border-left: 1px solid var(--color-graphite)
+}
+
+.depositsTitle {
+  letter-spacing: 0;
+  color: var(--color-graphite);
+  display: flex;
+  align-items: center;
+  min-height: 30px;
+  margin: 0 0 32px;
+}
+
+.filtersDropdown {
+  margin-left: 16px;
+}
+
+.list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.list li {
+  margin: 8px 0;
+}
+
+.buttonsWrap {
+  display: flex;
+  justify-content: center;
+  margin-top: 48px;
+}

@@ -1,0 +1,62 @@
+.depositCard {
+  margin-bottom: 45px;
+}
+
+.container {
+  display: flex;
+  align-items: flex-start;
+}
+
+.inner {
+  margin: 0 auto;
+  max-width: 438px;
+  width: 100%;
+}
+
+.subTitle {
+  margin-bottom: 16px;
+  color: var(--color-graphite);
+  letter-spacing: 0;
+  display: block;
+}
+
+.inputWrap {
+  position: relative;
+  border: 1px solid var(--color-graphite);
+  border-radius: 4px;
+  overflow: hidden;
+  margin-bottom: 120px;
+}
+
+.input {
+  border: 0;
+  background: var(--color-paper);
+  width: 100%;
+  padding: 15px 42px 13px;
+  font: inherit;
+  font-size: 12px;
+  line-height: 18px;
+  color: var(--color-ink);
+}
+
+.inputIcon {
+  color: var(--color-ink);
+  position: absolute;
+  top: 50%;
+  left: 16px;
+  transform: translateY(-50%);
+}
+
+.buttonsWarp {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.button {
+  min-width: 160px;
+}
+
+.button + .button {
+  margin-left: 16px;
+}

@@ -1,9 +1,11 @@
+import cn from 'classnames';
+
 import { Tooltip } from './Tooltip';
 import s from './s.module.css';
 
-export const Check = () => {
+export const Bill = ({ className }) => {
   return (
-    <div className={s.wrap}>
+    <div className={cn(s.wrap, className)}>
       <div className={s.mainRow}>
         <div className={s.value} data-subvalue="~$4670.35">
           <strong>0.1</strong> ฿TC

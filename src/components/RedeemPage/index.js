@@ -1,4 +1,5 @@
 import { Switch, Route, Redirect } from 'react-router-dom';
+
 import DepositsPage from 'components/RedeemPage/Deposits';
 import DepositPage from 'components/RedeemPage/Deposit';
 import AddressPage from 'components/RedeemPage/Address';

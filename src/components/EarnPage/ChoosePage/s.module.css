@@ -1,0 +1,86 @@
+.wrap {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.title {
+  margin: 92px 0 56px;
+  text-align: center;
+}
+
+.container {
+  max-width: 636px;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  margin: 0 auto 16px;
+}
+
+.card {
+  display: flex;
+  flex-direction: column;
+  flex-basis: 100%;
+  border: 1px solid var(--color-ink);
+  border-radius: 8px;
+  padding: 32px;
+  align-self: stretch;
+  min-height: 354px;
+}
+
+.card + .card {
+  margin-left: 16px;
+}
+
+.cardTitle {
+  text-align: center;
+  margin: 0 0 56px
+}
+
+.currencyIcons {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--color-ink);
+  margin: 0 0 26px;
+}
+
+.currencyArrow {
+  margin: 0 16px;
+  color: var(--color-graphite);
+}
+
+.currency {
+  font-size: 54px;
+  font-weight: 700;
+  line-height: 54px;
+  text-align: center;
+  color: var(--color-ink);
+}
+
+.currency.orange {
+  color: var(--color-turmeric);
+}
+
+.currency.green {
+  color: var(--color-mint);
+}
+
+.fee {
+  font-size: 8px;
+  font-weight: 400;
+  line-height: 12px;
+  text-align: center;
+  color: var(--color-graphite);
+}
+
+.button {
+  font-size: 8px !important;
+  margin: auto auto 0;
+  min-width: 134px;
+}
+
+.warn {
+  color: var(--color-ink);
+  margin: auto 32px 26px;
+}

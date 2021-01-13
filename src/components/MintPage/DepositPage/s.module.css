@@ -1,24 +1,7 @@
-.page {
-  padding: 32px;
-  min-height: 100%;
-  position: relative;
-}
-
-.heading {
-  margin-bottom: 32px;
-  text-align: left;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-}
-
 .content {
   display: flex;
   justify-content: space-between;
   padding: 0 24px;
-}
-
-.block {
 }
 
 .blockTitle {

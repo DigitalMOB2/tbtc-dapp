@@ -1,0 +1,128 @@
+.wrap {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.heading {
+  display: flex;
+  align-items: center;
+  padding: 32px 64px;
+}
+
+.title {
+  margin-right: 72px;
+}
+
+.headerIcon {
+  margin-left: auto;
+}
+
+.container {
+  display: flex;
+  justify-content: space-between;
+  align-self: stretch;
+  height: 100%;
+}
+
+.container > div {
+  padding: 32px 64px;
+  flex-basis: 27%;
+}
+
+.container > div:nth-child(2) {
+  flex-basis: 46%;
+  border-left: 1px solid var(--color-parchment);
+  border-right: 1px solid var(--color-parchment);
+  display: flex;
+  flex-direction: column;
+}
+
+.blockTitle {
+  color: var(--color-graphite);
+  letter-spacing: 0;
+  margin: 0 0 32px
+}
+
+.walletAsset {
+  padding: 36px 0;
+}
+
+.walletAsset:first-of-type {
+  padding-top: 0;
+}
+
+.walletAsset + .walletAsset {
+  border-top: 1px solid var(--color-parchment);
+}
+
+.walletAsset > div:nth-child(2) {
+  color: var(--color-graphite);
+  letter-spacing: 0;
+}
+
+.inputWrap {
+  position: relative;
+}
+
+.input {
+  font-family: inherit;
+  font-size: 36px;
+  font-weight: 500;
+  line-height: 48px;
+  color: var(--color-ink);
+  width: 100%;
+  padding: 13px 108px 13px 16px;
+  border: 1px solid var(--color-graphite);
+  border-radius: 8px;
+  background: transparent;
+}
+
+.inputCurrency {
+  pointer-events: none;
+  font-size: 36px;
+  font-weight: 300;
+  line-height: 48px;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  right: 16px
+}
+
+.termsWrap {
+  margin: 44px 0;
+}
+
+.termsWrap dt,
+.termsWrap dd {
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 15px;
+}
+
+.termsWrap dd {
+  text-align: right;
+}
+
+.terms {
+  font-size: 8px;
+  font-weight: 400;
+  line-height: 12px;
+  color: var(--color-graphite);
+}
+
+.termsRow {
+  display: flex;
+  justify-content: space-between;
+  padding: 12px 0;
+}
+
+.termsRow + .termsRow {
+  border-top: 1px solid var(--color-parchment);
+}
+
+.button {
+  margin: 108px auto 16px;
+  min-width: 158px;
+}

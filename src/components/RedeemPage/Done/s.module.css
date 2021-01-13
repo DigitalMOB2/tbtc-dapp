@@ -1,0 +1,40 @@
+.container {
+  display: flex;
+  align-items: flex-start;
+}
+
+.inner {
+  margin: 0 auto;
+  max-width: 438px;
+  width: 100%;
+}
+
+.amount {
+  font-size: 36px;
+  font-weight: 300;
+  line-height: 54px;
+  text-align: center;
+}
+
+.amount strong {
+  font-weight: 500;
+}
+
+
+.subTitle {
+  margin-bottom: 16px;
+  color: var(--color-graphite);
+  letter-spacing: 0;
+  display: block;
+}
+
+.buttonsWrap {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 40px;
+}
+
+.button {
+  min-width: 180px;
+}

@@ -2,33 +2,50 @@ import { useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import cn from 'classnames';
 
+import { useMint } from '..';
+import { useGeneral } from 'context/general';
 import { useTBTCContract } from 'hooks/wallet';
-import { Dropdown } from '../../Dropdown';
-import { Checklist } from '../../Checklist';
-import { Amount } from '../../Amount';
-import { Check } from '../../Check';
-import { Progress } from '../../Progress';
+
+import { Dropdown } from 'components/Dropdown';
+import { Checklist } from 'components/Checklist';
+import { Amount } from 'components/Amount';
+import { Bill } from 'components/Bill';
+import { Progress } from 'components/Progress';
+
 import { AlphaAlertModal } from './AlphaAlertModal';
 import { GenerateAddressModal } from './GenerateAddressModal';
 import s from './s.module.css';
-import { useMint } from '..';
-import { useGeneral } from 'context/general';
 
 const options = [
   {
     value: 'mint1',
     children: 'Mint 864',
     level: 'normal',
+    icon: {
+      id: 'circle',
+      width: 10,
+      height: 10,
+    },
   },
   {
     value: 'mint2',
     children: 'Mint 8641',
     level: 'error',
+    icon: {
+      id: 'error',
+      width: 10,
+      height: 10,
+    },
   },
   {
     value: 'mint3',
     children: 'Mint 86435',
     level: 'warning',
+    icon: {
+      id: 'sign',
+      width: 10,
+      height: 10,
+    },
   },
 ];
 
@@ -83,8 +100,8 @@ export default function MintPage() {
   };
 
   return (
-    <div className={s.page}>
-      <div className={s.heading}>
+    <div className="page">
+      <div className="heading">
         <h2 className="typography-h2">Start a Mint by depositing BTC</h2>
         <Dropdown
           options={options}
@@ -94,7 +111,7 @@ export default function MintPage() {
       </div>
       <Checklist />
       <div className={s.content}>
-        <div className={s.block}>
+        <div>
           <h3 className={cn('typography-h5', s.blockTitle)}>Amount</h3>
           <Amount
             values={amounts}
@@ -103,9 +120,9 @@ export default function MintPage() {
             callback={handlerAmount}
           />
         </div>
-        <form className={s.block} onSubmit={submitHandler}>
+        <form onSubmit={submitHandler}>
           <h3 className={cn('typography-h5', s.blockTitle)}>Review</h3>
-          <Check />
+          <Bill />
           <div className={s.buttonsWrap}>
             <button
               type="button"
@@ -122,7 +139,7 @@ export default function MintPage() {
             </button>
           </div>
         </form>
-        <div className={s.block}>
+        <div>
           <h3 className={cn('typography-h5', s.blockTitle)}>Progress</h3>
           <Progress
             options={[

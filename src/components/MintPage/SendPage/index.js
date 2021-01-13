@@ -3,11 +3,12 @@ import { useParams, Redirect } from 'react-router-dom';
 import QR from 'qrcode.react';
 import cn from 'classnames';
 
+import { useMint } from '..';
 import { useTBTCContract } from 'hooks/wallet';
 import { formatSatsToBtc, getEtherscanUrl } from 'utils/wallet';
 import { copyToClipboard } from 'utils/copyToClipboard';
+
 import { Svg } from 'components/Svg';
-import { useMint } from '..';
 import { useWallet } from 'context/wallet';
 import { Progress } from 'components/Progress';
 
