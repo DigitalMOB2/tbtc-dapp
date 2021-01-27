@@ -8,7 +8,7 @@ import s from './s.module.css';
 
 export default function WithdrawPage() {
   const [checkboxValue, setCheckboxValue] = useState(null);
-  const [amount, setAmount] = useState(null);
+  const [amount, setAmount] = useState('');
   const [wallet, setWallet] = useState(
     '0x931D387731bBbC988B312206c74F77D004D6B84b67f32'
   );
@@ -87,7 +87,10 @@ export default function WithdrawPage() {
           <NavLink to="/" className={cn('button', 'secondary-red', s.button)}>
             Cancel
           </NavLink>
-          <NavLink to="/" className={cn('button', 'secondary', s.button)}>
+          <NavLink
+            to="/earn/withdraw/confirm"
+            className={cn('button', 'secondary', s.button)}
+          >
             Confirm ->
           </NavLink>
         </div>

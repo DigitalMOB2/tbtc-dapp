@@ -4,6 +4,8 @@ import DepositPage from './DepositPage';
 import ConfirmDepositPage from './ConfirmDepositPage';
 import CardsPage from './CardsPage';
 import WithdrawPage from './WithdrawPage';
+import ConfirmWithdrawPage from './ConfirmWithdrawPage';
+import WithdrawnPage from './WithdrawnPage';
 
 export default function EarnPage() {
   return (
@@ -17,6 +19,12 @@ export default function EarnPage() {
         component={ConfirmDepositPage}
       />
       <Route exact path="/earn/withdraw" component={WithdrawPage} />
+      <Route
+        exact
+        path="/earn/withdraw/confirm"
+        component={ConfirmWithdrawPage}
+      />
+      <Route exact path="/earn/withdraw/done" component={WithdrawnPage} />
 
       <Redirect to="/earn" />
     </Switch>
