@@ -1,0 +1,43 @@
+.closeButton {
+  text-decoration: none;
+  color: var(--color-ink);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+}
+
+.closeButton:hover {
+  opacity: 0.8;
+}
+
+.container {
+  text-align: center;
+  margin-top: 100px;
+}
+
+.complete {
+  margin-top: 15px;
+}
+
+.currency {
+  margin-top: 45px;
+  font-size: 54px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 54px;
+  color: var(--color-turmeric);
+}
+
+.thin {
+  font-weight: 300;
+}
+
+.principle {
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 15px;
+  color: var(--color-graphite);
+}
